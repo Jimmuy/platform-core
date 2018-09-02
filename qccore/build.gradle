@@ -1,0 +1,62 @@
+apply plugin: 'android-library'
+
+android {
+    compileSdkVersion Integer.parseInt(ANDROID_BUILD_SDK_VERSION)
+    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(ANDROID_BUILD_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(ANDROID_BUILD_TARGET_SDK_VERSION)
+        versionCode 3
+        versionName VERSION_NAME
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['res']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    buildToolsVersion '25.0.0'
+}
+
+
+configurations.all {
+
+    resolutionStrategy {
+
+        cacheChangingModulesFor 0, 'seconds'
+
+    }
+
+}
+
+dependencies {
+    compile files('libs/gson-2.3.jar')
+    compile group: 'com.android.support', name: 'appcompat-v7', version: ANDROID_SUPPORT_LIBRARY_VERSION
+    compile 'org.cryptonode.jncryptor:jncryptor:1.2.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+}
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

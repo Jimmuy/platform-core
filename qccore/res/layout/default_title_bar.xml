@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title_bar"
+    style="@style/TitleBar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/titlebar_height" >
+
+    <FrameLayout
+        android:id="@+id/title_bar_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/title_bar_title"
+            style="@style/TitleBarTitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:maxWidth="240dip"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/title_bar_subtitle"
+            style="@style/TitleBarSubTitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:ellipsize="end"
+            android:singleLine="true" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/title_bar_left_view_container"
+        android:layout_width="80dip"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/left_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/title_bar_right_view_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" />
+
+</FrameLayout>

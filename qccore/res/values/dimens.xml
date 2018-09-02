@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- title bar height-->
+    <dimen name="titlebar_height">44dp</dimen>
+
+    <dimen name="titlebar_right_margin">10dp</dimen>
+
+    <dimen name="debug_agent_params_x">30dp</dimen>
+
+    <dimen name="debug_agent_params_y">100dp</dimen>
+
+    <dimen name="debug_agent_params_10">10dp</dimen>
+
+</resources>

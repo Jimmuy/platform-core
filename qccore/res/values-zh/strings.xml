@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="close">关闭</string>
+    <string name="whether_close_alert">是否关闭?</string>
+    <string name="web_url_empty">url链接为空</string>
+    <string name="web_url_error">url链接错误</string>
+    <string name="app_crash">应用遇到问题了，=。=！</string>
+</resources>

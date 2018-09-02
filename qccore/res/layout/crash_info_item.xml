@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="5dp"
+    android:descendantFocusability="blocksDescendants">
+
+
+
+
+        <TextView
+            android:id="@+id/crash_info_item_tv"
+            android:layout_width="match_parent"
+            android:background="@color/theme_color"
+            android:layout_height="70dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/white"></TextView>
+
+
+</RelativeLayout>

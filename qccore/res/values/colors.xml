@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 白色 -->
+    <color name="white">#ffffffff</color>
+
+    <!-- 头部的深蓝色 背景颜色 -->
+    <color name="theme_color">#357be1</color>
+
+</resources>

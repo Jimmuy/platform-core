@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="whether_close_alert">Confirm to close this page?</string>
+    <string name="web_url_empty">url link is empty</string>
+    <string name="web_url_error">url link error</string>
+    <string name="app_crash">Application has encountered a problem，=。=！</string>
+
+</resources>
