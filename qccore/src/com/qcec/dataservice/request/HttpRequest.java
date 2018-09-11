@@ -4,6 +4,8 @@ import com.qcec.dataservice.base.Request;
 
 import java.util.Map;
 
+import okhttp3.RequestBody;
+
 public interface HttpRequest extends Request{
 	
 	/**

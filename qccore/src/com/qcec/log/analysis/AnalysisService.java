@@ -1,20 +1,15 @@
 package com.qcec.log.analysis;
 
 import android.text.format.DateFormat;
-import android.util.Log;
 
 import com.qcec.app.QCApplication;
 import com.qcec.datamodel.GsonConverter;
-import com.qcec.datamodel.ResultModel;
 import com.qcec.dataservice.base.RequestHandler;
 import com.qcec.dataservice.request.ApiRequest;
 import com.qcec.dataservice.request.BasicApiRequest;
-import com.qcec.dataservice.request.BasicHttpRequest;
 import com.qcec.dataservice.request.HttpMethod;
-import com.qcec.dataservice.request.HttpRequest;
-import com.qcec.dataservice.request.RequestBody;
+import com.qcec.dataservice.request.JsonBody;
 import com.qcec.dataservice.response.ApiResponse;
-import com.qcec.dataservice.response.HttpResponse;
 import com.qcec.log.QCLog;
 import com.qcec.log.ConsoleLog;
 import com.qcec.log.LogDBHelper;
@@ -23,6 +18,8 @@ import com.qcec.utils.DeviceUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.RequestBody;
 
 /**
  * Created by lorin on 16/3/17.
@@ -212,45 +209,45 @@ public class AnalysisService {
      * @param markInfos
      */
     public static void uploadInfo(final ArrayList<AnalysisInfo> markInfos) {
-
-        if (markInfos.size() > 0) {
-
-            BasicApiRequest analysisUploadRequest = new BasicApiRequest(AnalysisService.markUploadUrl, HttpMethod.POST);
-            analysisUploadRequest.addHeader("apikey", AnalysisService.createAPIKey(markInfos.get(0).getContent()));
-            RequestBody.JsonBody jsonBody = new RequestBody.JsonBody(getListBody(markInfos));
-            analysisUploadRequest.setBody(jsonBody);
-
-            QCApplication.getInstance().getApiService().exec(analysisUploadRequest, new RequestHandler<ApiRequest, ApiResponse>() {
-                @Override
-                public void onRequestStart(ApiRequest req) {
-
-                }
-
-                @Override
-                public void onRequestProgress(ApiRequest req, int count, int total) {
-
-                }
-
-                @Override
-                public void onRequestFinish(ApiRequest req, ApiResponse resp) {
-                    QCLog.d(markInfos.size() + " record Upload Successful!!!");
-
-                    if (!isDebug && resp.getResultModel().status == 0 && null != markInfos && markInfos.size() > 0) {
-                        analysisDataClient.deleteMarkMessagesByid(markInfos);
-                    }
-                }
-
-                @Override
-                public void onRequestFailed(ApiRequest req, ApiResponse resp) {
-                    if (!isDebug && null != markInfos && markInfos.size() > 0) {
-                        analysisDataClient.motifyMessageStatus(markInfos, analysisDataClient.ANALYSIS_ITEM_COMMON);
-                    }
-                }
-            });
-
-        } else {
-            QCLog.w("No Analysis Info");
-        }
+//
+//        if (markInfos.size() > 0) {
+//
+//            BasicApiRequest analysisUploadRequest = new BasicApiRequest(AnalysisService.markUploadUrl, HttpMethod.POST);
+//            analysisUploadRequest.addHeader("apikey", AnalysisService.createAPIKey(markInfos.get(0).getContent()));
+//            JsonBody jsonBody = new JsonBody(getListBody(markInfos));
+//            analysisUploadRequest.setBody(jsonBody);
+//
+//            QCApplication.getInstance().getApiService().exec(analysisUploadRequest, new RequestHandler<ApiRequest, ApiResponse>() {
+//                @Override
+//                public void onRequestStart(ApiRequest req) {
+//
+//                }
+//
+//                @Override
+//                public void onRequestProgress(ApiRequest req, int count, int total) {
+//
+//                }
+//
+//                @Override
+//                public void onRequestFinish(ApiRequest req, ApiResponse resp) {
+//                    QCLog.d(markInfos.size() + " record Upload Successful!!!");
+//
+//                    if (!isDebug && resp.getResultModel().status == 0 && null != markInfos && markInfos.size() > 0) {
+//                        analysisDataClient.deleteMarkMessagesByid(markInfos);
+//                    }
+//                }
+//
+//                @Override
+//                public void onRequestFailed(ApiRequest req, ApiResponse resp) {
+//                    if (!isDebug && null != markInfos && markInfos.size() > 0) {
+//                        analysisDataClient.motifyMessageStatus(markInfos, analysisDataClient.ANALYSIS_ITEM_COMMON);
+//                    }
+//                }
+//            });
+//
+//        } else {
+//            QCLog.w("No Analysis Info");
+//        }
     }
 
 

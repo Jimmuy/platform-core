@@ -23,7 +23,7 @@ android {
         }
 
         // Move the tests to tests/java, tests/res, etc...
-        instrumentTest.setRoot('tests')
+
 
         // Move the build types to build-types/<type>
         // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
@@ -38,7 +38,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '27.0.3'
 }
 
 
@@ -53,10 +53,10 @@ configurations.all {
 }
 
 dependencies {
-    compile files('libs/gson-2.3.jar')
-    compile group: 'com.android.support', name: 'appcompat-v7', version: ANDROID_SUPPORT_LIBRARY_VERSION
-    compile 'org.cryptonode.jncryptor:jncryptor:1.2.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    api files('libs/gson-2.3.jar')
+    api group: 'com.android.support', name: 'appcompat-v7', version: ANDROID_SUPPORT_LIBRARY_VERSION
+    implementation 'org.cryptonode.jncryptor:jncryptor:1.2.0'
+    api 'com.github.bumptech.glide:glide:4.7.1'
+    api 'com.squareup.okhttp3:okhttp:3.11.0'
 }
 
-apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

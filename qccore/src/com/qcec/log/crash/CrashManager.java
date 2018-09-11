@@ -8,28 +8,23 @@ import android.widget.Toast;
 
 import com.qcec.app.QCApplication;
 import com.qcec.core.R;
-import com.qcec.datamodel.GsonConverter;
-import com.qcec.datamodel.ResultModel;
 import com.qcec.dataservice.base.RequestHandler;
 import com.qcec.dataservice.request.ApiRequest;
 import com.qcec.dataservice.request.BasicApiRequest;
-import com.qcec.dataservice.request.BasicHttpRequest;
 import com.qcec.dataservice.request.HttpMethod;
-import com.qcec.dataservice.request.HttpRequest;
-import com.qcec.dataservice.request.RequestBody;
 import com.qcec.dataservice.response.ApiResponse;
-import com.qcec.dataservice.response.HttpResponse;
 import com.qcec.log.ActivityInfoStack;
 import com.qcec.log.LogDBHelper;
 import com.qcec.log.QCLog;
 import com.qcec.log.SmartLogger;
 import com.qcec.utils.DeviceUtils;
-import com.qcec.utils.DeviceUuidFactory;
 import com.qcec.utils.SystemUtils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+
+import okhttp3.RequestBody;
 
 /**
  * 崩溃日志的管理类,用来捕获,保存,处理崩溃日志
@@ -225,47 +220,47 @@ public class CrashManager {
      * @param crashInfos
      */
     private static void uploadInfoAction(final List<CrashInfoModel> crashInfos) {
-
-        if (crashInfos.size() > 0) {
-
-            BasicApiRequest crashUploadRequest = new BasicApiRequest(crashUploadUrl, HttpMethod.POST);
-            crashUploadRequest.addHeader("apikey", createAPIKey(crashInfos.get(0)));
-            RequestBody.JsonBody jsonBody = new RequestBody.JsonBody(getListBody(crashInfos));
-            SmartLogger.json(jsonBody.getJson());
-
-            crashUploadRequest.setBody(jsonBody);
-            QCApplication.getInstance().getApiService().exec(crashUploadRequest, new RequestHandler<ApiRequest, ApiResponse>() {
-                @Override
-                public void onRequestStart(ApiRequest req) {
-
-                }
-
-                @Override
-                public void onRequestProgress(ApiRequest req, int count, int total) {
-
-                }
-
-                @Override
-                public void onRequestFinish(ApiRequest req, ApiResponse resp) {
-                    if (resp.getResultModel().status == 0) {
-                        SmartLogger.d("SUCCESS:" + resp.getResultModel().status + " | ");
-                        //1为已发送状态
-                        dataClient.motifyMessageStatus(crashInfos, dataClient.CRASH_ITEM_UPLOADING_COMPLETE);
-                    } else {
-                        SmartLogger.d("Finish Error:" + resp.getResultModel().status + " | ");
-                    }
-                }
-
-                @Override
-                public void onRequestFailed(ApiRequest req, ApiResponse resp) {
-                    SmartLogger.d("Crash Upload Fail");
-
-                }
-            });
-
-        } else {
-            QCLog.w("No Analysis Info");
-        }
+//
+//        if (crashInfos.size() > 0) {
+//
+//            BasicApiRequest crashUploadRequest = new BasicApiRequest(crashUploadUrl, HttpMethod.POST);
+//            crashUploadRequest.addHeader("apikey", createAPIKey(crashInfos.get(0)));
+//            RequestBody.JsonBody jsonBody = new RequestBody.JsonBody(getListBody(crashInfos));
+//            SmartLogger.json(jsonBody.getJson());
+//
+//            crashUploadRequest.setBody(jsonBody);
+//            QCApplication.getInstance().getApiService().exec(crashUploadRequest, new RequestHandler<ApiRequest, ApiResponse>() {
+//                @Override
+//                public void onRequestStart(ApiRequest req) {
+//
+//                }
+//
+//                @Override
+//                public void onRequestProgress(ApiRequest req, int count, int total) {
+//
+//                }
+//
+//                @Override
+//                public void onRequestFinish(ApiRequest req, ApiResponse resp) {
+//                    if (resp.getResultModel().status == 0) {
+//                        SmartLogger.d("SUCCESS:" + resp.getResultModel().status + " | ");
+//                        //1为已发送状态
+//                        dataClient.motifyMessageStatus(crashInfos, dataClient.CRASH_ITEM_UPLOADING_COMPLETE);
+//                    } else {
+//                        SmartLogger.d("Finish Error:" + resp.getResultModel().status + " | ");
+//                    }
+//                }
+//
+//                @Override
+//                public void onRequestFailed(ApiRequest req, ApiResponse resp) {
+//                    SmartLogger.d("Crash Upload Fail");
+//
+//                }
+//            });
+//
+//        } else {
+//            QCLog.w("No Analysis Info");
+//        }
     }
 
     /**

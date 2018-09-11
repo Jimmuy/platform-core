@@ -41,15 +41,15 @@ public class DebugCrashListActivity extends QCActivity {
 
 
     private void initView() {
-        getTitleBar().setTitle("崩溃列表");
-        getTitleBar().addRightViewItem("", "清空历史", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CrashManager.clearAllCrashInfos();
-                dataList.clear();
-                adapter.notifyDataSetChanged();
-            }
-        });
+//        getTitleBar().setTitle("崩溃列表");
+//        getTitleBar().addRightViewItem("", "清空历史", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                CrashManager.clearAllCrashInfos();
+//                dataList.clear();
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
         crashInfoLv = (ListView) findViewById(R.id.crash_info_list_view);
         adapter = new CrashListItemAdapter();
         crashInfoLv.setDivider(null);

@@ -3,6 +3,8 @@ package com.qcec.dataservice.request;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.RequestBody;
+
 public class BasicHttpRequest implements HttpRequest {
 
     protected static final int DEFAULT_TIMEOUT = 15000;

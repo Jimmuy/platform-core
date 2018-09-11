@@ -19,7 +19,7 @@ public class DebugCrashDetailActivity extends QCActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crash_info_detail_activity);
-        getTitleBar().setTitle("崩溃日志详情");
+//        getTitleBar().setTitle("崩溃日志详情");
 
         crashInfoDetailTv = (TextView) findViewById(R.id.crash_info_detail_tv);
         crashInfoDetailTv.setText(getIntent().getStringExtra("crashInfo"));

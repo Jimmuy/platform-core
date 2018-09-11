@@ -4,14 +4,15 @@ import com.qcec.app.QCApplication;
 import com.qcec.dataservice.base.CacheStrategy;
 import com.qcec.utils.PreferenceUtils;
 import com.qcec.utils.SystemUtils;
-import com.qcec.dataservice.request.RequestBody.FormBody;
-import com.qcec.dataservice.request.RequestBody.JsonBody;
 
-import java.util.Iterator;
-import java.util.Map;
+
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class BasicApiRequest extends BasicHttpRequest implements ApiRequest {
-
+    private static final MediaType CONTENT_FORM_TYPE = MediaType.get("application/x-www-form-urlencoded");
+    private static final MediaType CONTENT_JSON_TYPE = MediaType.get("application/json");
     private int cacheStrategy = CacheStrategy.NONE;
 
     public BasicApiRequest(String url) {
@@ -37,24 +38,20 @@ public class BasicApiRequest extends BasicHttpRequest implements ApiRequest {
 
     public String getCacheKey() {
         StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(getUrl()+"?");
+        urlBuilder.append(getUrl() + "?");
 
         RequestBody body = getBody();
-        if(body instanceof FormBody) {
-            FormBody formBody = (FormBody)body;
-
-            Iterator iterator = formBody.getParams().entrySet().iterator();
-            while (iterator.hasNext()) {
-                Map.Entry entry = (Map.Entry)iterator.next();
-                urlBuilder.append(entry.getKey()).append("=");
-                urlBuilder.append(entry.getValue()).append("&");
+        if (CONTENT_FORM_TYPE.equals(body.contentType())) {
+            FormBody formBody = (FormBody) body;
+            for (int i = 0; i < formBody.size(); i++) {
+                urlBuilder.append(formBody.name(i)).append("=");
+                urlBuilder.append(formBody.value(i)).append("&");
             }
-
-        } else if (body instanceof JsonBody) {
+        } else if (CONTENT_JSON_TYPE.equals(body.contentType())) {
             JsonBody jsonBody = (JsonBody) body;
 
             urlBuilder.append("body=");
-            urlBuilder.append(jsonBody.getJson()).append("&");
+            urlBuilder.append(jsonBody.getParams()).append("&");
         }
 
         String userId = PreferenceUtils.getPrefString(QCApplication.getInstance(), "id", "");

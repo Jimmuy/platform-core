@@ -56,42 +56,42 @@ public class QCWebviewActivity extends QCActivity {
         setContentView(R.layout.webview_layout);
         webView = (WebView) findViewById(R.id.webview);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
-        if (getTitleBar().getTitleStyle() == TitleBar.CUSTOM_TITLE) {
-            getTitleBar().setLeftView(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    goBack();
-                }
-            });
-            getTitleBar().addRightViewItem("close", getString(R.string.close), new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (webView.canGoBack()) {
-                        if (!TextUtils.isEmpty(alertMessage)) {
-                        } else {
-                            new AlertDialog.Builder(QCWebviewActivity.this)
-                                    .setTitle(getString(R.string.whether_close_alert))
-                                    .setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            hideKeyboard(webView);
-                                            finish();
-                                        }
-                                    }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.dismiss();
-                                }
-                            }).show();
-                        }
-                    } else {
-                        hideKeyboard(webView);
-                        finish();
-                    }
-                }
-            });
-        }
+//        if (getTitleBar().getTitleStyle() == TitleBar.CUSTOM_TITLE) {
+//            getTitleBar().setLeftView(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//                    goBack();
+//                }
+//            });
+//            getTitleBar().addRightViewItem("close", getString(R.string.close), new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (webView.canGoBack()) {
+//                        if (!TextUtils.isEmpty(alertMessage)) {
+//                        } else {
+//                            new AlertDialog.Builder(QCWebviewActivity.this)
+//                                    .setTitle(getString(R.string.whether_close_alert))
+//                                    .setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialogInterface, int i) {
+//                                            hideKeyboard(webView);
+//                                            finish();
+//                                        }
+//                                    }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    dialogInterface.dismiss();
+//                                }
+//                            }).show();
+//                        }
+//                    } else {
+//                        hideKeyboard(webView);
+//                        finish();
+//                    }
+//                }
+//            });
+//        }
     }
 
     protected void setupWebView() {
@@ -174,9 +174,9 @@ public class QCWebviewActivity extends QCActivity {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
-            if (getTitleBar().getTitleStyle() == TitleBar.CUSTOM_TITLE) {
-                getTitleBar().setTitle(title);
-            }
+//            if (getTitleBar().getTitleStyle() == TitleBar.CUSTOM_TITLE) {
+//                getTitleBar().setTitle(title);
+//            }
         }
 
         @Override

@@ -3,7 +3,6 @@ package com.qcec.dataservice.base;
 /**
  * Callback used to deal with asynchronous request.
  *
- * 
  */
 public interface RequestHandler<T extends Request, R extends Response> {
 	

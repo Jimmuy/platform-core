@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,26 +25,26 @@ import static android.R.attr.data;
  * Contains basic service and widget.
  *
  */
-public class QCActivity extends FragmentActivity {
+public class QCActivity extends AppCompatActivity {
 
     private HttpService httpService;
     private ApiService apiService;
-    private TitleBar titleBar;
+//    private TitleBar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        titleBar = initTitleBar();
-        if (titleBar.getTitleStyle() == TitleBar.CUSTOM_TITLE) {
-            titleBar.setTitle(getTitle());
-            titleBar.setLeftView(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    hideKeyboard(v);
-                    QCActivity.this.finish();
-                }
-            });
-        }
+//        titleBar = initTitleBar();
+//        if (titleBar.getTitleStyle() == TitleBar.CUSTOM_TITLE) {
+//            titleBar.setTitle(getTitle());
+//            titleBar.setLeftView(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    hideKeyboard(v);
+//                    QCActivity.this.finish();
+//                }
+//            });
+//        }
         QCApplication.getInstance().activityOnCreate(this);
     }
 
@@ -135,9 +135,9 @@ public class QCActivity extends FragmentActivity {
 
     private static final String TAG = QCActivity.class.getSimpleName();
 
-    public TitleBar getTitleBar() {
-        return titleBar;
-    }
+//    public TitleBar getTitleBar() {
+//        return titleBar;
+//    }
 
 
     @Override
