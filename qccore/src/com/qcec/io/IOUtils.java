@@ -3,9 +3,6 @@ package com.qcec.io;
 import java.io.Closeable;
 import java.io.IOException;
 
-/**
- * Created by sunyun on 16/2/23.
- */
 public class IOUtils {
 
     private IOUtils() {

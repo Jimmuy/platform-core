@@ -26,9 +26,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-/**
- * Created by sunyun on 16/4/29.
- */
 public final class HttpEngine {
 
     private Context context;
@@ -86,8 +83,7 @@ public final class HttpEngine {
         Response execute = call.execute();
 
         if (execute.code() == 0) {
-            throw new IOException(
-                    "Could not retrieve response code from OkHttp.");
+            throw new IOException("Could not retrieve response code from OkHttp.");
         }
 
         HashMap<String, String> responseHeaders = new HashMap<String, String>();

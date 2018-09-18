@@ -18,9 +18,7 @@ import com.qcec.utils.VersionUtils;
 
 import java.text.DecimalFormat;
 
-/**
- * Created by sunyun on 16/3/27.
- */
+
 public class DebugAgent {
 
     Context appContext;

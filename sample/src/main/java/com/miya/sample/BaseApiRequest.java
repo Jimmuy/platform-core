@@ -10,9 +10,6 @@ import com.qcec.utils.SystemUtils;
 
 import java.util.Map;
 
-/**
- * Created by sunyun on 16/5/19.
- */
 public class BaseApiRequest extends BasicApiRequest {
     Map<String, Object> params;
     Object data;

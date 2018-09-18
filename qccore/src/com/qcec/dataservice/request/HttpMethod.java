@@ -1,8 +1,5 @@
 package com.qcec.dataservice.request;
 
-/**
- * Created by sunyun on 16/4/22.
- */
 public final class HttpMethod {
 
     private HttpMethod() {}

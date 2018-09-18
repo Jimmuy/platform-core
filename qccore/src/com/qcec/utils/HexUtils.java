@@ -1,9 +1,5 @@
 package com.qcec.utils;
 
-/**
- * Created by sunyun on 17/4/25.
- */
-
 public class HexUtils {
 
     public static String bytesToHexString(byte[] bytes) {

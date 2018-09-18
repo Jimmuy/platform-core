@@ -8,7 +8,6 @@ import com.qcec.debug.DebugManager;
 
 /**
  * 用来在Debug模式中在console控制台上打印log
- * Created by sunyun on 16/4/19.
  */
 public final class ConsoleLog {
     private ConsoleLog() {

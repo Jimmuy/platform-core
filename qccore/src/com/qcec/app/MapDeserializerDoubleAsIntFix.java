@@ -15,9 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by yanghui on 2017/7/28.
- */
 
 public class MapDeserializerDoubleAsIntFix implements JsonDeserializer<Map<String, Object>> {
 

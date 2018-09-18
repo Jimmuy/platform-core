@@ -12,9 +12,6 @@ import com.qcec.utils.VersionUtils;
 
 import java.io.File;
 
-/**
- * Created by sunyun on 16/2/23.
- */
 public class FileManager {
 
     public enum StorageType {

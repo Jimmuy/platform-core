@@ -2,9 +2,6 @@ package com.qcec.utils;
 
 import com.qcec.app.QCApplication;
 
-/**
- * Created by sunyun on 16/4/25.
- */
 public enum NetworkQuality {
 
     NET_LOSS(100),

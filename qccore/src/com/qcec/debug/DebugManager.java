@@ -13,7 +13,6 @@ import com.qcec.utils.SystemUtils;
 
 /**
  * Debug的管理类
- * Created by jimmy on 16/2/22.
  */
 public class DebugManager {
 

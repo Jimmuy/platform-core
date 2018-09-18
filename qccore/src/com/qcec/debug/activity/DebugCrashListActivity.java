@@ -18,10 +18,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-/**
- * 崩溃日志列表界面
- * Created by sunyun on 16/1/26.
- */
 public class DebugCrashListActivity extends QCActivity {
 
     private ListView crashInfoLv;

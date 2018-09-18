@@ -7,9 +7,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by sunyun on 16/3/9.
- */
 public class ActivityInfoStack {
 
     static LinkedList<ActivityInfo> list = new LinkedList();
