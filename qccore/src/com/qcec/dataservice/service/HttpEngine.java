@@ -41,7 +41,6 @@ public final class HttpEngine {
         if (NetworkUtils.getNetworkClass(context) == NetworkUtils.NETWORK_TYPE_UNAVAILABLE) {
             return new BasicHttpResponse(1025, request.getHeaders(), null, "网络已关闭".getBytes());
         }
-
         long startTime = System.currentTimeMillis();
 
         HttpResponse response;

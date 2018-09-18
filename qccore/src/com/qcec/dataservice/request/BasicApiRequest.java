@@ -49,7 +49,6 @@ public class BasicApiRequest extends BasicHttpRequest implements ApiRequest {
             }
         } else if (CONTENT_JSON_TYPE.equals(body.contentType())) {
             JsonBody jsonBody = (JsonBody) body;
-
             urlBuilder.append("body=");
             urlBuilder.append(jsonBody.getParams()).append("&");
         }

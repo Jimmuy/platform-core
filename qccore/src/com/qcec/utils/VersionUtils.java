@@ -33,4 +33,7 @@ public class VersionUtils {
 	public static boolean hasKitKat() {
 		return Build.VERSION.SDK_INT >= VERSION_CODES.KITKAT;
 	}
+	public static boolean hasO() {
+		return Build.VERSION.SDK_INT >= VERSION_CODES.O;
+	}
 }
