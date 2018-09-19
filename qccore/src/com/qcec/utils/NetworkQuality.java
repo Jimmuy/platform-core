@@ -1,6 +1,6 @@
 package com.qcec.utils;
 
-import com.qcec.app.QCApplication;
+import com.qcec.app.CoreApplication;
 
 public enum NetworkQuality {
 
@@ -19,7 +19,7 @@ public enum NetworkQuality {
     public synchronized static NetworkQuality current() {
         if(current != null) return current;
 
-        int perc = PreferenceUtils.getPrefInt(QCApplication.getInstance(), "percentage", 0);
+        int perc = PreferenceUtils.getPrefInt(CoreApplication.getInstance(), "percentage", 0);
         if(perc >= 100) {
             current = NET_LOSS;
         } else if(perc >= 50) {
@@ -32,6 +32,6 @@ public enum NetworkQuality {
 
     public synchronized static void setNetworkQuality(NetworkQuality quality) {
         current = quality;
-        PreferenceUtils.setPrefInt(QCApplication.getInstance(), "percentage", quality.percentage);
+        PreferenceUtils.setPrefInt(CoreApplication.getInstance(), "percentage", quality.percentage);
     }
 }

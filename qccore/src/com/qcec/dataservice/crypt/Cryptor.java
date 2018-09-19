@@ -12,7 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * Created by chen on 15/4/28.
  */
-public class QCCryptor extends AES256JNCryptor {
+public class Cryptor extends AES256JNCryptor {
 
     @Override
     public SecretKey keyForPassword(char[] password, byte[] salt) throws CryptorException {

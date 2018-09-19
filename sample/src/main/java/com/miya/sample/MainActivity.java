@@ -2,27 +2,23 @@ package com.miya.sample;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.miya.sample.databinding.HomeActivityBinding;
-import com.qcec.app.QCActivity;
+import com.qcec.app.CoreActivity;
 import com.qcec.dataservice.base.RequestHandler;
 import com.qcec.dataservice.request.ApiRequest;
 import com.qcec.dataservice.request.BasicApiRequest;
-import com.qcec.dataservice.request.BasicHttpRequest;
 import com.qcec.dataservice.response.ApiResponse;
-import com.qcec.debug.DebugAgent;
 import com.qcec.debug.DebugManager;
 
 
-public class MainActivity extends QCActivity implements View.OnClickListener {
+public class MainActivity extends CoreActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

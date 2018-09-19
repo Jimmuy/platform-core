@@ -5,13 +5,12 @@ import android.content.Context;
 import com.qcec.dataservice.request.HttpRequest;
 import com.qcec.dataservice.response.BasicHttpResponse;
 import com.qcec.dataservice.response.HttpResponse;
-import com.qcec.log.QCLog;
+import com.qcec.log.CoreLog;
 import com.qcec.utils.NetworkUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +23,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public final class HttpEngine {
 
@@ -64,7 +62,7 @@ public final class HttpEngine {
         sb.append(response.getStatusCode()).append(',');
         sb.append(elapse).append("ms");
         sb.append(") ").append(request.getUrl());
-        QCLog.i(sb.toString());
+        CoreLog.i(sb.toString());
 
         return response;
 

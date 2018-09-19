@@ -1,7 +1,5 @@
 package com.qcec.app;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -19,7 +17,7 @@ import android.widget.Toast;
 import com.qcec.core.R;
 
 
-public class QCWebviewActivity extends QCActivity {
+public class CoreWebviewActivity extends CoreActivity {
 
     protected WebView webView;
     protected ProgressBar progressBar;
@@ -70,7 +68,7 @@ public class QCWebviewActivity extends QCActivity {
 //                    if (webView.canGoBack()) {
 //                        if (!TextUtils.isEmpty(alertMessage)) {
 //                        } else {
-//                            new AlertDialog.Builder(QCWebviewActivity.this)
+//                            new AlertDialog.Builder(CoreWebviewActivity.this)
 //                                    .setTitle(getString(R.string.whether_close_alert))
 //                                    .setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
 //                                        @Override

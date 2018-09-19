@@ -55,7 +55,7 @@ public class CryptorFactory {
         }
         try {
             decryptData = Base64.decode(ciphertext, Base64.DEFAULT);
-            JNCryptor cryptor = new QCCryptor();
+            JNCryptor cryptor = new Cryptor();
             return cryptor.decryptData(decryptData, password.toCharArray());
         } catch (CryptorException e) {
             e.printStackTrace();
@@ -103,7 +103,7 @@ public class CryptorFactory {
         }
 
         try {
-            JNCryptor cryptor = new QCCryptor();
+            JNCryptor cryptor = new Cryptor();
             byte[] encryptData = cryptor.encryptData(plaintext, password.toCharArray());
             return Base64.encode(encryptData, Base64.DEFAULT);
         } catch (CryptorException e) {

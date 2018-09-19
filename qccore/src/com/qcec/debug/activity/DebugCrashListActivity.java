@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.qcec.app.QCActivity;
+import com.qcec.app.CoreActivity;
 import com.qcec.core.R;
 import com.qcec.log.crash.CrashInfoModel;
 import com.qcec.log.crash.CrashManager;
@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class DebugCrashListActivity extends QCActivity {
+public class DebugCrashListActivity extends CoreActivity {
 
     private ListView crashInfoLv;
 

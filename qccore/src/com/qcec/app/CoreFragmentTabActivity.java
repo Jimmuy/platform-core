@@ -32,9 +32,9 @@ import java.util.HashMap;
  * TabHost through fragments. It uses a trick (see the code below) to allow the
  * tabs to switch between fragments instead of simple views.
  */
-public class QCFragmentTabActivity extends QCActivity {
+public class CoreFragmentTabActivity extends CoreActivity {
 
-	private static final String LOG_TAG = QCFragmentTabActivity.class
+	private static final String LOG_TAG = CoreFragmentTabActivity.class
 			.getSimpleName();
 
 	protected TabHost mTabHost;
@@ -97,7 +97,7 @@ public class QCFragmentTabActivity extends QCActivity {
 	 * the selected tab changes.
 	 */
 	public static class TabManager implements TabHost.OnTabChangeListener {
-		private final QCFragmentTabActivity mActivity;
+		private final CoreFragmentTabActivity mActivity;
 		private final TabHost mTabHost;
 		private final int mContainerId;
 		private final HashMap<String, TabInfo> mTabs = new HashMap<String, TabInfo>();
@@ -132,8 +132,8 @@ public class QCFragmentTabActivity extends QCActivity {
 			}
 		}
 
-		public TabManager(QCFragmentTabActivity activity, TabHost tabHost,
-				int containerId) {
+		public TabManager(CoreFragmentTabActivity activity, TabHost tabHost,
+                          int containerId) {
 			mActivity = activity;
 			mTabHost = tabHost;
 			mContainerId = containerId;

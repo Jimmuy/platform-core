@@ -7,7 +7,7 @@ import com.qcec.dataservice.base.DataService;
 import com.qcec.dataservice.base.RequestHandler;
 import com.qcec.dataservice.request.HttpRequest;
 import com.qcec.dataservice.response.HttpResponse;
-import com.qcec.log.QCLog;
+import com.qcec.log.CoreLog;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
@@ -35,7 +35,7 @@ public class HttpService implements DataService<HttpRequest, HttpResponse> {
         if (prevTask == null) {
             currentTask.executeOnExecutor(executor);
         } else {
-            QCLog.e("http cannot exec duplicate request (same instance)");
+            CoreLog.e("http cannot exec duplicate request (same instance)");
         }
     }
 

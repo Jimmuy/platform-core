@@ -1,9 +1,7 @@
 package com.miya.sample;
 
 
-import android.support.v4.app.FragmentTabHost;
-
-import com.qcec.app.QCApplication;
+import com.qcec.app.CoreApplication;
 import com.qcec.dataservice.request.BasicApiRequest;
 import com.qcec.dataservice.request.JsonBody;
 import com.qcec.utils.SystemUtils;
@@ -61,7 +59,7 @@ public class BaseApiRequest extends BasicApiRequest {
         StringBuilder agentBuilder = new StringBuilder();
         agentBuilder.append("(Android;").append(android.os.Build.VERSION.RELEASE).append(";").append(android.os.Build.MODEL).append(")");
         addHeader("Agent", agentBuilder.toString());
-        addHeader("VersionCode", SystemUtils.getVersionName(QCApplication.getInstance()));
+        addHeader("VersionCode", SystemUtils.getVersionName(CoreApplication.getInstance()));
         addHeader("Accept", "application/json");
 
         if (params != null) {

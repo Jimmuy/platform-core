@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.qcec.app.QCApplication;
+import com.qcec.app.CoreApplication;
 
 /**
  * Created by lorin on 16/2/3.
@@ -26,7 +26,7 @@ public class LogDBHelper extends SQLiteOpenHelper {
         if (null == dbHelper) {
             synchronized (LogDBHelper.class) {
                 if (dbHelper == null) {
-                    dbHelper = new LogDBHelper(QCApplication.getInstance());
+                    dbHelper = new LogDBHelper(CoreApplication.getInstance());
                 }
             }
         }

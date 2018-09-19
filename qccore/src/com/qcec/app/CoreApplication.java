@@ -13,7 +13,7 @@ import com.qcec.dataservice.base.DataServiceManager;
 import com.qcec.dataservice.service.ApiService;
 import com.qcec.dataservice.service.HttpService;
 import com.qcec.interfaces.IAccountManager;
-import com.qcec.log.QCLog;
+import com.qcec.log.CoreLog;
 import com.qcec.utils.SystemUtils;
 
 import java.util.Map;
@@ -23,9 +23,9 @@ import java.util.Map;
  *
  */
 
-public class QCApplication extends Application {
+public class CoreApplication extends Application {
 
-    private static QCApplication instance;
+    private static CoreApplication instance;
     private DataServiceManager serviceManager;
     private HttpService httpService;
     private ApiService apiService;
@@ -40,7 +40,7 @@ public class QCApplication extends Application {
     private static int activeCounter;
 
 
-    public static QCApplication getInstance() {
+    public static CoreApplication getInstance() {
         if (instance == null) {
             throw new IllegalStateException("Application has not been created");
         }
@@ -51,7 +51,7 @@ public class QCApplication extends Application {
     /**
      * Your SHOULDN'T NEVER call this method yourself!
      */
-    public QCApplication() {
+    public CoreApplication() {
         instance = this;
     }
 
@@ -67,7 +67,7 @@ public class QCApplication extends Application {
     public void onCreate() {
         super.onCreate();
         if (!SystemUtils.isDebuggable(this)) {
-            QCLog.isPrint = false;
+            CoreLog.isPrint = false;
         }
 
         //Gson. Deserialize integers as integers and not as doubles
@@ -76,20 +76,20 @@ public class QCApplication extends Application {
     }
 
     public void onApplicationStart() {
-        QCLog.i("QCApplication::onApplicationStart");
+        CoreLog.i("CoreApplication::onApplicationStart");
     }
 
     public void onApplicationResume() {
-        QCLog.i("QCApplication::onApplicationResume");
+        CoreLog.i("CoreApplication::onApplicationResume");
     }
 
     public void onApplicationPause() {
-        QCLog.i("QCApplication::onApplicationPause");
+        CoreLog.i("CoreApplication::onApplicationPause");
 
     }
 
     public void onApplicationStop() {
-        QCLog.i("QCApplication::onApplicationStop");
+        CoreLog.i("CoreApplication::onApplicationStop");
 
     }
 
@@ -128,7 +128,7 @@ public class QCApplication extends Application {
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
                 if ((--activeCounter) == 0) {
-                    QCApplication.getInstance().onApplicationPause();
+                    CoreApplication.getInstance().onApplicationPause();
                 }
             }
         }

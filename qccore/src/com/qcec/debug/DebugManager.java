@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.qcec.app.QCApplication;
+import com.qcec.app.CoreApplication;
 import com.qcec.log.analysis.AnalysisService;
 import com.qcec.utils.PreferenceUtils;
 import com.qcec.utils.SystemUtils;
@@ -36,7 +36,7 @@ public class DebugManager {
         if (instance == null) {
             synchronized (DebugManager.class) {
                 if(instance == null) {
-                    instance = new DebugManager(QCApplication.getInstance());
+                    instance = new DebugManager(CoreApplication.getInstance());
                 }
             }
         }

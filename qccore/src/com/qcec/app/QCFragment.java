@@ -9,7 +9,7 @@ import com.qcec.core.R;
 import com.qcec.dataservice.service.ApiService;
 import com.qcec.dataservice.service.HttpService;
 import com.qcec.utils.ActivityAnimationStyle;
-import com.qcec.log.QCLog;
+import com.qcec.log.CoreLog;
 
 public class QCFragment extends Fragment {
 
@@ -25,7 +25,7 @@ public class QCFragment extends Fragment {
 
     public void startActivity(String urlSchema, int pushStyle) {
         if (TextUtils.isEmpty(urlSchema)) {
-            QCLog.e("startActivity java.lang.Null: URL to null ");
+            CoreLog.e("startActivity java.lang.Null: URL to null ");
             return;
         }
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlSchema)), pushStyle);
@@ -41,7 +41,7 @@ public class QCFragment extends Fragment {
         if (isAdded()) {
             startActivity(intent, ActivityAnimationStyle.STYLE_SLIDE_IN);
         } else {
-            QCLog.e("startActivity java.lang.IllegalStateException: Fragment not attached to Activity ");
+            CoreLog.e("startActivity java.lang.IllegalStateException: Fragment not attached to Activity ");
         }
     }
 
@@ -84,12 +84,12 @@ public class QCFragment extends Fragment {
             super.startActivityForResult(intent, requestCode);
             setPushAnimationStyle(pushStyle);
         } else {
-            QCLog.e("startActivity java.lang.IllegalStateException: Fragment not attached to Activity ");
+            CoreLog.e("startActivity java.lang.IllegalStateException: Fragment not attached to Activity ");
         }
     }
 
     public Object getService(String name) {
-        return QCApplication.getInstance().getService(name);
+        return CoreApplication.getInstance().getService(name);
     }
 
     public HttpService getHttpService() {

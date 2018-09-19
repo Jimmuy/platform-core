@@ -14,18 +14,15 @@ import com.qcec.datamodel.GsonConverter;
 import com.qcec.dataservice.service.ApiService;
 import com.qcec.dataservice.service.HttpService;
 import com.qcec.utils.ActivityAnimationStyle;
-import com.qcec.log.QCLog;
 
 import java.lang.reflect.Type;
-
-import static android.R.attr.data;
 
 /**
  * Base Activity extends fragment activity.
  * Contains basic service and widget.
  *
  */
-public class QCActivity extends AppCompatActivity {
+public class CoreActivity extends AppCompatActivity {
 
     private HttpService httpService;
     private ApiService apiService;
@@ -41,11 +38,11 @@ public class QCActivity extends AppCompatActivity {
 //                @Override
 //                public void onClick(View v) {
 //                    hideKeyboard(v);
-//                    QCActivity.this.finish();
+//                    CoreActivity.this.finish();
 //                }
 //            });
 //        }
-        QCApplication.getInstance().activityOnCreate(this);
+        CoreApplication.getInstance().activityOnCreate(this);
     }
 
     public <T> T getIntentData(Type type) {
@@ -66,8 +63,8 @@ public class QCActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        QCApplication.getInstance().activityOnResume(this);
-        QCApplication.getInstance().setCurrentActivity(this);
+        CoreApplication.getInstance().activityOnResume(this);
+        CoreApplication.getInstance().setCurrentActivity(this);
     }
 
     public void finish(int slideStyle) {
@@ -114,18 +111,18 @@ public class QCActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        QCApplication.getInstance().activityOnPause(this);
-        if (this.equals(QCApplication.getInstance().getCurrentActivity())) {
-            QCApplication.getInstance().setCurrentActivity(null);
+        CoreApplication.getInstance().activityOnPause(this);
+        if (this.equals(CoreApplication.getInstance().getCurrentActivity())) {
+            CoreApplication.getInstance().setCurrentActivity(null);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        QCApplication.getInstance().activityOnDestroy(this);
-        if (this.equals(QCApplication.getInstance().getCurrentActivity())) {
-            QCApplication.getInstance().setCurrentActivity(null);
+        CoreApplication.getInstance().activityOnDestroy(this);
+        if (this.equals(CoreApplication.getInstance().getCurrentActivity())) {
+            CoreApplication.getInstance().setCurrentActivity(null);
         }
     }
 
@@ -133,7 +130,7 @@ public class QCActivity extends AppCompatActivity {
         return new TitleBar(this, TitleBar.CUSTOM_TITLE);
     }
 
-    private static final String TAG = QCActivity.class.getSimpleName();
+    private static final String TAG = CoreActivity.class.getSimpleName();
 
 //    public TitleBar getTitleBar() {
 //        return titleBar;
@@ -187,7 +184,7 @@ public class QCActivity extends AppCompatActivity {
     }
 
     public Object getService(String name) {
-        return QCApplication.getInstance().getService(name);
+        return CoreApplication.getInstance().getService(name);
     }
 
     public HttpService getHttpService() {

@@ -5,9 +5,9 @@ import android.util.Log;
 /**
  * log工具类,打印类型和系统提供的log工具相同
  */
-public final class QCLog {
+public final class CoreLog {
 
-    private QCLog() {
+    private CoreLog() {
     }
 
     private static String TAG = "qcec";

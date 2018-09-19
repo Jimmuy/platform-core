@@ -19,25 +19,25 @@ public class QCTabActivity extends TabActivity{
 		super.onCreate(savedInstanceState);
 		titleBar = initTitleBar();
 		
-		QCApplication.getInstance().activityOnCreate(this);
+		CoreApplication.getInstance().activityOnCreate(this);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		QCApplication.getInstance().activityOnResume(this);
+		CoreApplication.getInstance().activityOnResume(this);
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
-		QCApplication.getInstance().activityOnPause(this);
+		CoreApplication.getInstance().activityOnPause(this);
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		QCApplication.getInstance().activityOnDestroy(this);
+		CoreApplication.getInstance().activityOnDestroy(this);
 	}
 	
 	protected TitleBar initTitleBar() {
@@ -59,7 +59,7 @@ public class QCTabActivity extends TabActivity{
 	}
 	
 	public Object getService(String name) {
-		return QCApplication.getInstance().getService(name);
+		return CoreApplication.getInstance().getService(name);
 	}
 
 	public HttpService getHttpService() {

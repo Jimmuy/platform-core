@@ -6,25 +6,16 @@ import android.os.Looper;
 import android.text.format.DateFormat;
 import android.widget.Toast;
 
-import com.qcec.app.QCApplication;
+import com.qcec.app.CoreApplication;
 import com.qcec.core.R;
-import com.qcec.dataservice.base.RequestHandler;
-import com.qcec.dataservice.request.ApiRequest;
-import com.qcec.dataservice.request.BasicApiRequest;
-import com.qcec.dataservice.request.HttpMethod;
-import com.qcec.dataservice.response.ApiResponse;
 import com.qcec.log.ActivityInfoStack;
 import com.qcec.log.LogDBHelper;
-import com.qcec.log.QCLog;
-import com.qcec.log.SmartLogger;
 import com.qcec.utils.DeviceUtils;
 import com.qcec.utils.SystemUtils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
-
-import okhttp3.RequestBody;
 
 /**
  * 崩溃日志的管理类,用来捕获,保存,处理崩溃日志
@@ -97,7 +88,7 @@ public class CrashManager {
         sb.append(stringWriter.toString());
 
         CrashInfoModel info = new CrashInfoModel();
-        Application application = QCApplication.getInstance();
+        Application application = CoreApplication.getInstance();
         info.setHasSent(0);
         info.setUuid(DeviceUtils.getUUID(application));
         info.setDate(DateFormat.format("yyyy-MM-dd kk:mm:ss", crashTime).toString());
@@ -121,7 +112,7 @@ public class CrashManager {
      * 处理应用崩溃
      */
     private static void processCrash(Thread thread, Throwable ex) {
-        Context context = QCApplication.getInstance();
+        Context context = CoreApplication.getInstance();
         if (SystemUtils.isDebuggable(context)) {
             defaultExceptionHandler.uncaughtException(thread, ex);
             return;
@@ -180,7 +171,7 @@ public class CrashManager {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(QCApplication.getInstance(), message, Toast.LENGTH_LONG).show();
+                Toast.makeText(CoreApplication.getInstance(), message, Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
         }).start();
@@ -229,7 +220,7 @@ public class CrashManager {
 //            SmartLogger.json(jsonBody.getJson());
 //
 //            crashUploadRequest.setBody(jsonBody);
-//            QCApplication.getInstance().getApiService().exec(crashUploadRequest, new RequestHandler<ApiRequest, ApiResponse>() {
+//            CoreApplication.getInstance().getApiService().exec(crashUploadRequest, new RequestHandler<ApiRequest, ApiResponse>() {
 //                @Override
 //                public void onRequestStart(ApiRequest req) {
 //
@@ -259,7 +250,7 @@ public class CrashManager {
 //            });
 //
 //        } else {
-//            QCLog.w("No Analysis Info");
+//            CoreLog.w("No Analysis Info");
 //        }
     }
 

@@ -232,19 +232,19 @@ public final class SmartLogger {
     private static void logChunk(int logLevel, String chunk) {
         switch (logLevel) {
             case ERROR:
-                QCLog.e(chunk);
+                CoreLog.e(chunk);
                 break;
             case INFO:
-                QCLog.i(chunk);
+                CoreLog.i(chunk);
                 break;
             case VERBOSE:
-                QCLog.v(chunk);
+                CoreLog.v(chunk);
                 break;
             case WARN:
-                QCLog.w(chunk);
+                CoreLog.w(chunk);
                 break;
             default:
-                QCLog.d(chunk);
+                CoreLog.d(chunk);
                 break;
         }
     }
@@ -281,7 +281,7 @@ public final class SmartLogger {
             return object.toString();
         }
 
-        QCLog.e("[SmartLogger] THE OBJECT IS NULL");
+        CoreLog.e("[SmartLogger] THE OBJECT IS NULL");
         return "null";
     }
 }

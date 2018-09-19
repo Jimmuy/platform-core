@@ -1,6 +1,6 @@
 package com.qcec.dataservice.request;
 
-import com.qcec.app.QCApplication;
+import com.qcec.app.CoreApplication;
 import com.qcec.dataservice.base.CacheStrategy;
 import com.qcec.utils.PreferenceUtils;
 import com.qcec.utils.SystemUtils;
@@ -53,8 +53,8 @@ public class BasicApiRequest extends BasicHttpRequest implements ApiRequest {
             urlBuilder.append(jsonBody.getParams()).append("&");
         }
 
-        String userId = PreferenceUtils.getPrefString(QCApplication.getInstance(), "id", "");
-        urlBuilder.append(userId).append(SystemUtils.getPackageName(QCApplication.getInstance()));
+        String userId = PreferenceUtils.getPrefString(CoreApplication.getInstance(), "id", "");
+        urlBuilder.append(userId).append(SystemUtils.getPackageName(CoreApplication.getInstance()));
 
         return urlBuilder.toString();
     }

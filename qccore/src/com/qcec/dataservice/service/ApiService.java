@@ -13,7 +13,7 @@ import com.qcec.dataservice.request.ApiRequest;
 import com.qcec.dataservice.response.ApiResponse;
 import com.qcec.dataservice.response.BasicApiResponse;
 import com.qcec.dataservice.response.HttpResponse;
-import com.qcec.log.QCLog;
+import com.qcec.log.CoreLog;
 
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -52,7 +52,7 @@ public class ApiService implements DataService<ApiRequest, ApiResponse> {
         if (prevTask == null) {
             currentTask.executeOnExecutor(executor);
         } else {
-            QCLog.e("api cannot exec duplicate request (same instance)");
+            CoreLog.e("api cannot exec duplicate request (same instance)");
         }
     }
 
@@ -104,7 +104,7 @@ public class ApiService implements DataService<ApiRequest, ApiResponse> {
             if (req.getCacheStrategy() != CacheStrategy.NONE) {
                 final ApiResponse resp = requestCache.get(req);
                 if (resp != null) {
-                    QCLog.i("finish (CACHE STRATEGY:" + req.getCacheStrategy() + ") " + req.getUrl());
+                    CoreLog.i("finish (CACHE STRATEGY:" + req.getCacheStrategy() + ") " + req.getUrl());
                     if (req.getCacheStrategy() != CacheStrategy.CACHE_PRECEDENCE) {
                         return resp;
                     }
@@ -123,7 +123,7 @@ public class ApiService implements DataService<ApiRequest, ApiResponse> {
             Random random = new Random();
             int number = random.nextInt(100);
             if (number < NetworkQuality.current().percentage) {
-                QCLog.e("网络质量随机数：" + number + "  百分比" + NetworkQuality.current().percentage);
+                CoreLog.e("网络质量随机数：" + number + "  百分比" + NetworkQuality.current().percentage);
                 return new BasicApiResponse(1024, req.getHeaders(), null, "网络异常".getBytes());
             }
 

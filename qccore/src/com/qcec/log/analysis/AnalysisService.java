@@ -2,15 +2,9 @@ package com.qcec.log.analysis;
 
 import android.text.format.DateFormat;
 
-import com.qcec.app.QCApplication;
+import com.qcec.app.CoreApplication;
 import com.qcec.datamodel.GsonConverter;
-import com.qcec.dataservice.base.RequestHandler;
-import com.qcec.dataservice.request.ApiRequest;
-import com.qcec.dataservice.request.BasicApiRequest;
-import com.qcec.dataservice.request.HttpMethod;
-import com.qcec.dataservice.request.JsonBody;
-import com.qcec.dataservice.response.ApiResponse;
-import com.qcec.log.QCLog;
+import com.qcec.log.CoreLog;
 import com.qcec.log.ConsoleLog;
 import com.qcec.log.LogDBHelper;
 import com.qcec.utils.DeviceUtils;
@@ -18,8 +12,6 @@ import com.qcec.utils.DeviceUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.RequestBody;
 
 /**
  * Created by lorin on 16/3/17.
@@ -36,7 +28,7 @@ public class AnalysisService {
     private static int limitCount = 20;
     public static boolean isDebug = false;
 
-    private static String uuid = DeviceUtils.getUUID(QCApplication.getInstance());
+    private static String uuid = DeviceUtils.getUUID(CoreApplication.getInstance());
 
     /**
      * 传入URL，初始化AnalysisService
@@ -155,17 +147,17 @@ public class AnalysisService {
             ArrayList<AnalysisInfo> queryInfos = getUnsentMessages();
 
             if (queryInfos.size() > limitCount) {
-                QCLog.d("Notify Upload");
+                CoreLog.d("Notify Upload");
                 analysisDataClient.motifyMessageStatus(queryInfos,analysisDataClient.ANALYSIS_ITEM_UPLOADING);
                 uploadInfo(queryInfos);
 
             } else {
-                QCLog.d("Alanysis Info#Current Existed Count: " + queryInfos.size() + " [Add Successful]");
+                CoreLog.d("Alanysis Info#Current Existed Count: " + queryInfos.size() + " [Add Successful]");
             }
         } else {
             ArrayList<AnalysisInfo> queryInfos = getUnsentMessages();
             if (queryInfos.size() > 0) {
-                QCLog.d("Notify Upload");
+                CoreLog.d("Notify Upload");
                 analysisDataClient.motifyMessageStatus(queryInfos,analysisDataClient.ANALYSIS_ITEM_UPLOADING);
                 uploadInfo(queryInfos);
             }
@@ -217,7 +209,7 @@ public class AnalysisService {
 //            JsonBody jsonBody = new JsonBody(getListBody(markInfos));
 //            analysisUploadRequest.setBody(jsonBody);
 //
-//            QCApplication.getInstance().getApiService().exec(analysisUploadRequest, new RequestHandler<ApiRequest, ApiResponse>() {
+//            CoreApplication.getInstance().getApiService().exec(analysisUploadRequest, new RequestHandler<ApiRequest, ApiResponse>() {
 //                @Override
 //                public void onRequestStart(ApiRequest req) {
 //
@@ -230,7 +222,7 @@ public class AnalysisService {
 //
 //                @Override
 //                public void onRequestFinish(ApiRequest req, ApiResponse resp) {
-//                    QCLog.d(markInfos.size() + " record Upload Successful!!!");
+//                    CoreLog.d(markInfos.size() + " record Upload Successful!!!");
 //
 //                    if (!isDebug && resp.getResultModel().status == 0 && null != markInfos && markInfos.size() > 0) {
 //                        analysisDataClient.deleteMarkMessagesByid(markInfos);
@@ -246,7 +238,7 @@ public class AnalysisService {
 //            });
 //
 //        } else {
-//            QCLog.w("No Analysis Info");
+//            CoreLog.w("No Analysis Info");
 //        }
     }
 

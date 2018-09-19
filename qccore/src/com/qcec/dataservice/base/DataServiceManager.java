@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.qcec.dataservice.service.ApiService;
 import com.qcec.dataservice.service.HttpService;
-import com.qcec.log.QCLog;
+import com.qcec.log.CoreLog;
 
 public class DataServiceManager {
 
@@ -34,7 +34,7 @@ public class DataServiceManager {
             return apiService;
         }
 
-        QCLog.e("unknown service \"" + name + "\"");
+        CoreLog.e("unknown service \"" + name + "\"");
         return null;
     }
 
