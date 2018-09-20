@@ -1,7 +1,6 @@
 package com.miya.sample;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,22 +17,44 @@ import com.qcec.dataservice.response.ApiResponse;
 import com.qcec.debug.DebugManager;
 
 
-public class MainActivity extends CoreActivity implements View.OnClickListener {
-
+public class HomeActivity extends CoreActivity<HomeActivityBinding> implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        HomeActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setOnClick(this);
+        requestPermission();
+
+
+    }
+
+    private void initTitle() {
+        setTitle("title");
+        setRightText("right");
+        getRightView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showToast("right");
+            }
+        });
+        initTitle()
+    }
+
+    private void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if(!Settings.canDrawOverlays(getApplicationContext())) {
+            if (!Settings.canDrawOverlays(getApplicationContext())) {
                 //启动Activity让用户授权
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
                 intent.setData(Uri.parse("package:" + getPackageName()));
-                startActivityForResult(intent,100);
+                startActivityForResult(intent, 100);
             }
         }
     }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -53,26 +74,28 @@ public class MainActivity extends CoreActivity implements View.OnClickListener {
 
             @Override
             public void onRequestFinish(ApiRequest req, ApiResponse resp) {
-                Toast.makeText(MainActivity.this,"xxxx",Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "xxxx", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRequestFailed(ApiRequest req, ApiResponse resp) {
-                Toast.makeText(MainActivity.this,"aaaa",Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "aaaa", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 100){
+        if (requestCode == 100) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 DebugManager.getInstance().setDebugMode(true);
                 DebugManager.getInstance().getDebugAgent().setAgentTitle("xxxx");
-                }else {
-                    Toast.makeText(this,"ACTION_MANAGE_OVERLAY_PERMISSION权限已被拒绝",Toast.LENGTH_SHORT).show();;
-                }
+            } else {
+                Toast.makeText(this, "ACTION_MANAGE_OVERLAY_PERMISSION权限已被拒绝", Toast.LENGTH_SHORT).show();
+                ;
             }
-
         }
+
+    }
 }

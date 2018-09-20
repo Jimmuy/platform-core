@@ -7,6 +7,6 @@ public class BaseApplication extends CoreApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        DebugManager.getInstance().setDebugActivity(MainActivity.class);
+        DebugManager.getInstance().setDebugActivity(HomeActivity.class);
     }
 }

@@ -2,14 +2,22 @@ package com.qcec.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qcec.core.R;
+import com.qcec.core.databinding.TitleBinding;
 import com.qcec.datamodel.GsonConverter;
 import com.qcec.dataservice.service.ApiService;
 import com.qcec.dataservice.service.HttpService;
@@ -20,34 +28,58 @@ import java.lang.reflect.Type;
 /**
  * Base Activity extends fragment activity.
  * Contains basic service and widget.
- *
+ * T is Data Binding class name
  */
-public class CoreActivity extends AppCompatActivity {
+public abstract class CoreActivity<T extends ViewDataBinding> extends AppCompatActivity {
 
     private HttpService httpService;
     private ApiService apiService;
-//    private TitleBar titleBar;
+    protected T binding;
+    private TitleBinding titleBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        titleBar = initTitleBar();
-//        if (titleBar.getTitleStyle() == TitleBar.CUSTOM_TITLE) {
-//            titleBar.setTitle(getTitle());
-//            titleBar.setLeftView(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    hideKeyboard(v);
-//                    CoreActivity.this.finish();
-//                }
-//            });
-//        }
+        binding = DataBindingUtil.setContentView(this, getLayoutId());
         CoreApplication.getInstance().activityOnCreate(this);
+        initToolBar();
+    }
+
+    private void initToolBar() {
+        if (isShowTitleBar()) {
+            if (!(binding.getRoot() instanceof ViewGroup)) {
+                throw new IllegalArgumentException("root view must be a view group");
+            } else {
+                titleBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.view_toolbar, null, false);
+                titleBinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                ((ViewGroup) binding.getRoot()).addView(titleBinding.getRoot());
+            }
+
+            if (titleBinding.toolbar != null) {
+                //将Toolbar显示到界面
+                setSupportActionBar(titleBinding.toolbar);
+                //设置默认的标题不显示
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+            }
+            if (titleBinding.tvTitle != null) {
+                //getTitle()的值是activity的android:lable属性值
+                titleBinding.tvTitle.setText(getTitle());
+
+            }
+        }
+
+    }
+
+    /**
+     * 默认显示title bar 子类可以复写去除title bar
+     */
+    protected boolean isShowTitleBar() {
+        return true;
     }
 
     public <T> T getIntentData(Type type) {
         String json = getIntent().getStringExtra("data");
-        if(!TextUtils.isEmpty(json)) {
+        if (!TextUtils.isEmpty(json)) {
             return GsonConverter.decode(json, type);
         }
 
@@ -65,6 +97,12 @@ public class CoreActivity extends AppCompatActivity {
         super.onResume();
         CoreApplication.getInstance().activityOnResume(this);
         CoreApplication.getInstance().setCurrentActivity(this);
+        /**
+         * 判断是否有Toolbar,并默认显示返回按钮
+         */
+        if (null != titleBinding && isShowBacking()) {
+            showBack();
+        }
     }
 
     public void finish(int slideStyle) {
@@ -126,15 +164,7 @@ public class CoreActivity extends AppCompatActivity {
         }
     }
 
-    protected TitleBar initTitleBar() {
-        return new TitleBar(this, TitleBar.CUSTOM_TITLE);
-    }
-
     private static final String TAG = CoreActivity.class.getSimpleName();
-
-//    public TitleBar getTitleBar() {
-//        return titleBar;
-//    }
 
 
     @Override
@@ -173,9 +203,9 @@ public class CoreActivity extends AppCompatActivity {
             return;
         }
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlSchema));
-        if(data != null) {
-            if(data instanceof String) {
-                intent.putExtra("data", (String)data);
+        if (data != null) {
+            if (data instanceof String) {
+                intent.putExtra("data", (String) data);
             } else {
                 intent.putExtra("data", GsonConverter.toJson(data));
             }
@@ -202,6 +232,80 @@ public class CoreActivity extends AppCompatActivity {
     }
 
     /**
+     * 获取头部标题的TextView
+     *
+     * @return
+     */
+    public TextView getHeaderTitle() {
+        return titleBinding.tvTitle;
+    }
+
+    public void setRightText(CharSequence rightTitle) {
+        getRightView().setVisibility(View.VISIBLE);
+        getRightView().setText(rightTitle);
+
+    }
+
+    /**
+     * 获取头部标题的TextView
+     *
+     * @return
+     */
+    public TextView getRightView() {
+        return titleBinding.tvRightText;
+    }
+
+    /**
+     * 设置头部标题
+     *
+     * @param title
+     */
+    public void setTitle(CharSequence title) {
+        if (titleBinding.tvTitle != null) {
+            titleBinding.tvTitle.setText(title);
+        }
+    }
+
+
+    /**
+     * 版本号小于21的后退按钮图片
+     */
+    private void showBack() {
+        //setNavigationIcon必须在setSupportActionBar(toolbar);方法后面加入
+        titleBinding.toolbar.setNavigationIcon(getLeftDrawable());
+        titleBinding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    /**
+     * 设置左边返回按钮图片资源
+     */
+    protected int getLeftDrawable() {
+        return R.drawable.back;
+    }
+
+    /**
+     * 是否显示后退按钮,默认显示,可在子类重写该方法.
+     *
+     * @return
+     */
+    protected boolean isShowBacking() {
+        return true;
+    }
+
+    /**
+     * this activity layout res
+     * 设置layout布局,在子类重写该方法.
+     *
+     * @return res layout xml id
+     */
+    protected abstract int getLayoutId();
+
+    /**
      * 关闭软键盘
      *
      * @param view
@@ -219,4 +323,7 @@ public class CoreActivity extends AppCompatActivity {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 }

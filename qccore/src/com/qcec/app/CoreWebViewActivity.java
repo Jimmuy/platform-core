@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.qcec.core.R;
 
 
-public class CoreWebviewActivity extends CoreActivity {
+public class CoreWebViewActivity extends CoreActivity {
 
     protected WebView webView;
     protected ProgressBar progressBar;
@@ -31,6 +31,11 @@ public class CoreWebviewActivity extends CoreActivity {
         setupView();
         setupWebView();
         loadUrl(url);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.webview_layout;
     }
 
     protected void fetchParams() {
@@ -51,7 +56,6 @@ public class CoreWebviewActivity extends CoreActivity {
 
 
     protected void setupView() {
-        setContentView(R.layout.webview_layout);
         webView = (WebView) findViewById(R.id.webview);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
 //        if (getTitleBar().getTitleStyle() == TitleBar.CUSTOM_TITLE) {
@@ -68,7 +72,7 @@ public class CoreWebviewActivity extends CoreActivity {
 //                    if (webView.canGoBack()) {
 //                        if (!TextUtils.isEmpty(alertMessage)) {
 //                        } else {
-//                            new AlertDialog.Builder(CoreWebviewActivity.this)
+//                            new AlertDialog.Builder(CoreWebViewActivity.this)
 //                                    .setTitle(getString(R.string.whether_close_alert))
 //                                    .setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
 //                                        @Override

@@ -6,13 +6,10 @@
     android:padding="5dp"
     android:descendantFocusability="blocksDescendants">
 
-
-
-
         <TextView
             android:id="@+id/crash_info_item_tv"
             android:layout_width="match_parent"
-            android:background="@color/theme_color"
+            android:background="@color/colorPrimary"
             android:layout_height="70dp"
             android:textSize="20sp"
             android:gravity="center"

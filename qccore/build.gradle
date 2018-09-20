@@ -24,7 +24,6 @@ android {
 
         // Move the tests to tests/java, tests/res, etc...
 
-
         // Move the build types to build-types/<type>
         // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
         // This moves them out of them default location under src/<type>/... which would
@@ -39,6 +38,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
     buildToolsVersion '27.0.3'
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 
@@ -49,6 +52,7 @@ configurations.all {
         cacheChangingModulesFor 0, 'seconds'
 
     }
+
 
 }
 

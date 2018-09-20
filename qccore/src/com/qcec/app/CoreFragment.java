@@ -11,12 +11,12 @@ import com.qcec.dataservice.service.HttpService;
 import com.qcec.utils.ActivityAnimationStyle;
 import com.qcec.log.CoreLog;
 
-public class QCFragment extends Fragment {
+public class CoreFragment extends Fragment {
 
     private HttpService httpService;
     private ApiService apiService;
 
-    private static final String TAG = QCFragment.class.getSimpleName();
+    private static final String TAG = CoreFragment.class.getSimpleName();
 
     public void startActivity(String urlSchema) {
         this.startActivity(urlSchema, ActivityAnimationStyle.STYLE_SLIDE_IN);

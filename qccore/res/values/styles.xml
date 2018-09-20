@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:style/Theme.Light">
-        <item name="android:windowTitleSize">@dimen/titlebar_height</item>
-        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
-    </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
     <style name="TitleBar">
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>
-        <item name="android:background">@color/theme_color</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
     <style name="TitleBarTitleView">
@@ -32,7 +24,7 @@
     </style>
 
     <style name="CustomWindowTitleBackground">
-        <item name="android:background">@color/theme_color</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
 

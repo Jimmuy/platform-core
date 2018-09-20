@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <data class="CrashDetailBinding" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_weight="1"
-        android:fillViewport="false">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/crash_info_detail_tv"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:textSize="12sp"
-            android:layout_height="match_parent"></TextView>
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:fillViewport="false">
 
-    </ScrollView>
+            <TextView
+                android:id="@+id/crash_info_detail_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="12sp" />
+
+        </ScrollView>
 
 
-</LinearLayout>
+    </LinearLayout>
+</layout>
