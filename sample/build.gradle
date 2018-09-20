@@ -27,7 +27,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':qccore')
+    implementation project(':core')
     implementation 'com.android.support:support-v4:28.0.0-rc02'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
