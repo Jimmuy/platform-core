@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.miya.sample.databinding.HomeActivityBinding;
-import com.qcec.app.CoreActivity;
-import com.qcec.dataservice.base.RequestHandler;
-import com.qcec.dataservice.request.ApiRequest;
-import com.qcec.dataservice.request.BasicApiRequest;
-import com.qcec.dataservice.response.ApiResponse;
-import com.qcec.debug.DebugManager;
+import com.jimmy.app.CoreActivity;
+import com.jimmy.dataservice.base.RequestHandler;
+import com.jimmy.dataservice.request.ApiRequest;
+import com.jimmy.dataservice.request.BasicApiRequest;
+import com.jimmy.dataservice.response.ApiResponse;
+import com.jimmy.debug.DebugManager;
 
 
 public class HomeActivity extends CoreActivity<HomeActivityBinding> implements View.OnClickListener {

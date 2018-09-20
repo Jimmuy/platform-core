@@ -1,10 +1,10 @@
 package com.miya.sample;
 
 
-import com.qcec.app.CoreApplication;
-import com.qcec.dataservice.request.BasicApiRequest;
-import com.qcec.dataservice.request.JsonBody;
-import com.qcec.utils.SystemUtils;
+import com.jimmy.app.CoreApplication;
+import com.jimmy.dataservice.request.BasicApiRequest;
+import com.jimmy.dataservice.request.JsonBody;
+import com.jimmy.utils.SystemUtils;
 
 import java.util.Map;
 
