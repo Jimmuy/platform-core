@@ -23,8 +23,14 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
         super.onCreate(savedInstanceState);
         binding.setOnClick(this);
         requestPermission();
+        initTitle();
 
 
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     private void initTitle() {
@@ -36,7 +42,6 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
                 showToast("right");
             }
         });
-        initTitle()
     }
 
     private void requestPermission() {
@@ -48,11 +53,6 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
                 startActivityForResult(intent, 100);
             }
         }
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
     }
 
 
@@ -74,12 +74,12 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
 
             @Override
             public void onRequestFinish(ApiRequest req, ApiResponse resp) {
-                Toast.makeText(HomeActivity.this, "xxxx", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRequestFailed(ApiRequest req, ApiResponse resp) {
-                Toast.makeText(HomeActivity.this, "aaaa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "fail", Toast.LENGTH_SHORT).show();
             }
         });
     }
