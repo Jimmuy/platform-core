@@ -16,6 +16,7 @@ import java.util.List;
 public class GsonConverter {
     private static Gson gson = new GsonBuilder().create();
 
+
     public static void configTypeAdapterFactories(List<TypeAdapterFactory> factoryList) {
         if (factoryList == null) {
             factoryList = new ArrayList<>();
