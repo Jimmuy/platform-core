@@ -57,9 +57,9 @@ configurations.all {
 }
 
 dependencies {
-    api files('libs/gson-2.3.jar')
-    api group: 'com.android.support', name: 'appcompat-v7', version: ANDROID_SUPPORT_LIBRARY_VERSION
+    implementation files('libs/gson-2.3.jar')
+    implementation group: 'com.android.support', name: 'appcompat-v7', version: ANDROID_SUPPORT_LIBRARY_VERSION
     implementation 'org.cryptonode.jncryptor:jncryptor:1.2.0'
-    api 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }
 
