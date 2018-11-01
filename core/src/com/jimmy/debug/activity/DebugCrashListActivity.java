@@ -2,7 +2,7 @@ package com.jimmy.debug.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.jimmy.app.CoreActivity;
 import com.jimmy.core.R;
 import com.jimmy.log.crash.CrashInfoModel;
 import com.jimmy.log.crash.CrashManager;

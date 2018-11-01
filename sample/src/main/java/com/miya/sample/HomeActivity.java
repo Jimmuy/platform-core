@@ -58,30 +58,32 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
 
     @Override
     public void onClick(View view) {
-        DebugManager.getInstance().setDebugMode(true);
-        DebugManager.getInstance().getDebugAgent().setAgentTitle("xxxx");
-        BasicApiRequest request = new BasicApiRequest("http://joyoung-china.digilinx.net.cn/script/d_QuerySeedInfo.php", "GET");
-        getApiService().exec(request, new RequestHandler<ApiRequest, ApiResponse>() {
-            @Override
-            public void onRequestStart(ApiRequest req) {
-
-            }
-
-            @Override
-            public void onRequestProgress(ApiRequest req, int count, int total) {
-
-            }
-
-            @Override
-            public void onRequestFinish(ApiRequest req, ApiResponse resp) {
-                Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onRequestFailed(ApiRequest req, ApiResponse resp) {
-                Toast.makeText(HomeActivity.this, "fail", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        DebugManager.getInstance().setDebugMode(true);
+//        DebugManager.getInstance().getDebugAgent().setAgentTitle("xxxx");
+//        BasicApiRequest request = new BasicApiRequest("http://joyoung-china.digilinx.net.cn/script/d_QuerySeedInfo.php", "GET");
+//        getApiService().exec(request, new RequestHandler<ApiRequest, ApiResponse>() {
+//            @Override
+//            public void onRequestStart(ApiRequest req) {
+//
+//            }
+//
+//            @Override
+//            public void onRequestProgress(ApiRequest req, int count, int total) {
+//
+//            }
+//
+//            @Override
+//            public void onRequestFinish(ApiRequest req, ApiResponse resp) {
+//                Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onRequestFailed(ApiRequest req, ApiResponse resp) {
+//                Toast.makeText(HomeActivity.this, "fail", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivity(intent);
     }
 
     @Override
