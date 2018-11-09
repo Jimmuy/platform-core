@@ -2,12 +2,15 @@ package com.jimmy.app;
 
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+
 import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,30 +46,41 @@ public abstract class CoreActivity<T extends ViewDataBinding> extends AppCompatA
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         CoreApplication.getInstance().activityOnCreate(this);
         initToolBar();
+        initView();
     }
 
     private void initToolBar() {
         if (isShowTitleBar()) {
+
             if (!(binding.getRoot() instanceof ViewGroup)) {
                 throw new IllegalArgumentException("root view must be a view group");
             } else {
                 titleBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.view_toolbar, null, false);
                 titleBinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                ((ViewGroup) binding.getRoot()).addView(titleBinding.getRoot());
+                ((ViewGroup) binding.getRoot()).addView(titleBinding.getRoot(), 0);
             }
 
-            if (titleBinding.toolbar != null) {
-                //将Toolbar显示到界面
-                setSupportActionBar(titleBinding.toolbar);
-                //设置默认的标题不显示
-                getSupportActionBar().setDisplayShowTitleEnabled(false);
-            }
-            if (titleBinding.tvTitle != null) {
-                //getTitle()的值是activity的android:lable属性值
-                titleBinding.tvTitle.setText(getTitle());
+            if (titleBinding == null) return;
+            //将Toolbar显示到界面
+            setSupportActionBar(titleBinding.toolbar);
+            //设置默认的标题不显示
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+            //getTitle()的值是activity的android:lable属性值
+            titleBinding.tvTitle.setText(getTitle());
+
+            if (isShowBacking()) {
+                showBack();
             }
+
         }
+
+    }
+
+    /**
+     * 子类可复写做一些初始化的工作
+     */
+    protected void initView() {
 
     }
 
@@ -268,7 +282,7 @@ public abstract class CoreActivity<T extends ViewDataBinding> extends AppCompatA
 
 
     /**
-     * 版本号小于21的后退按钮图片
+     * 提供简单的返回按钮
      */
     private void showBack() {
         //setNavigationIcon必须在setSupportActionBar(toolbar);方法后面加入
