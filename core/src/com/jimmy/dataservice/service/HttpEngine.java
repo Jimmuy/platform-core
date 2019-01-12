@@ -15,6 +15,7 @@ import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPInputStream;
 
 import okhttp3.Call;
@@ -73,10 +74,10 @@ public final class HttpEngine {
         String method = request.getMethod();
         RequestBody body = request.getBody();
         Headers headers = Headers.of(request.getHeaders());
-        Request request = new Request.Builder().url(url).method(method, body).headers(headers).build();
+        Request okHttpRequest = new Request.Builder().url(url).method(method, body).headers(headers).build();
 
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Call call = okHttpClient.newCall(request);
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder().connectTimeout(request.getTimeout(), TimeUnit.MILLISECONDS).build();
+        Call call = okHttpClient.newCall(okHttpRequest);
         Response execute = call.execute();
 
         if (execute.code() == 0) {
