@@ -76,7 +76,7 @@ public final class HttpEngine {
         Headers headers = Headers.of(request.getHeaders());
         Request okHttpRequest = new Request.Builder().url(url).method(method, body).headers(headers).build();
 
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder().connectTimeout(request.getTimeout(), TimeUnit.MILLISECONDS).build();
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder().connectTimeout(request.getTimeout(), TimeUnit.MILLISECONDS).readTimeout(request.getTimeout(), TimeUnit.MILLISECONDS).build();
         Call call = okHttpClient.newCall(okHttpRequest);
         Response execute = call.execute();
 
