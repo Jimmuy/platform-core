@@ -8,6 +8,7 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
 
+import com.jimmy.datamodel.GsonConverter;
 import com.miya.sample.databinding.HomeActivityBinding;
 import com.jimmy.app.CoreActivity;
 import com.jimmy.dataservice.base.RequestHandler;
@@ -90,7 +91,7 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
 
             @Override
             public void onRequestFinish(ApiRequest req, ApiResponse resp) {
-                binding.tvContent.setText(resp.getResultMap().toString());
+                binding.tvContent.setText(resp.getJsonResult().toString());
                 Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_SHORT).show();
             }
 
