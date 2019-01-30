@@ -19,7 +19,6 @@ public class TestActivity extends CoreActivity<HomeActivityBinding> implements V
         super.onCreate(savedInstanceState);
         binding.setOnClick(this);
         initTitle();
-        binding.btnTest.setVisibility(View.VISIBLE);
 
     }
 

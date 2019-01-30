@@ -16,13 +16,14 @@ import com.jimmy.dataservice.request.BasicApiRequest;
 import com.jimmy.dataservice.response.ApiResponse;
 import com.jimmy.debug.DebugManager;
 
+import org.json.JSONObject;
+
 
 public class HomeActivity extends CoreActivity<HomeActivityBinding> implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding.setOnClick(this);
-        requestPermission();
         initTitle();
 
 
@@ -34,7 +35,7 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
     }
 
     private void initTitle() {
-        setTitle("title");
+        setTitle("Home");
         setRightText("right");
         getRightView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,32 +59,46 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
 
     @Override
     public void onClick(View view) {
-//        DebugManager.getInstance().setDebugMode(true);
-//        DebugManager.getInstance().getDebugAgent().setAgentTitle("xxxx");
-//        BasicApiRequest request = new BasicApiRequest("http://joyoung-china.digilinx.net.cn/script/d_QuerySeedInfo.php", "GET");
-//        getApiService().exec(request, new RequestHandler<ApiRequest, ApiResponse>() {
-//            @Override
-//            public void onRequestStart(ApiRequest req) {
-//
-//            }
-//
-//            @Override
-//            public void onRequestProgress(ApiRequest req, int count, int total) {
-//
-//            }
-//
-//            @Override
-//            public void onRequestFinish(ApiRequest req, ApiResponse resp) {
-//                Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onRequestFailed(ApiRequest req, ApiResponse resp) {
-//                Toast.makeText(HomeActivity.this, "fail", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-        Intent intent = new Intent(this, TestActivity.class);
-        startActivity(intent);
+        switch (view.getId()) {
+            case R.id.btn_request:
+                sendRequest();
+                break;
+
+            case R.id.btn_debug:
+                initDebug();
+                break;
+        }
+    }
+
+    private void initDebug() {
+        requestPermission();
+        DebugManager.getInstance().setDebugMode(true);
+    }
+
+    private void sendRequest() {
+        BasicApiRequest request = new BasicApiRequest(" https://www.easy-mock.com/mock/5c515611b1c1b9153666e243/example/test/get", "GET");
+        getApiService().exec(request, new RequestHandler<ApiRequest, ApiResponse>() {
+            @Override
+            public void onRequestStart(ApiRequest req) {
+
+            }
+
+            @Override
+            public void onRequestProgress(ApiRequest req, int count, int total) {
+
+            }
+
+            @Override
+            public void onRequestFinish(ApiRequest req, ApiResponse resp) {
+                binding.tvContent.setText(resp.getResultMap().toString());
+                Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRequestFailed(ApiRequest req, ApiResponse resp) {
+                Toast.makeText(HomeActivity.this, "fail", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -92,12 +107,18 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
         if (requestCode == 100) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 DebugManager.getInstance().setDebugMode(true);
-                DebugManager.getInstance().getDebugAgent().setAgentTitle("xxxx");
+                DebugManager.getInstance().getDebugAgent().setAgentTitle("debug");
             } else {
                 Toast.makeText(this, "ACTION_MANAGE_OVERLAY_PERMISSION权限已被拒绝", Toast.LENGTH_SHORT).show();
-                ;
+
             }
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DebugManager.getInstance().setDebugMode(false);
     }
 }
