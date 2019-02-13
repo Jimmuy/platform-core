@@ -8,7 +8,6 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
 
-import com.jimmy.datamodel.GsonConverter;
 import com.miya.sample.databinding.HomeActivityBinding;
 import com.jimmy.app.CoreActivity;
 import com.jimmy.dataservice.base.RequestHandler;
@@ -16,8 +15,6 @@ import com.jimmy.dataservice.request.ApiRequest;
 import com.jimmy.dataservice.request.BasicApiRequest;
 import com.jimmy.dataservice.response.ApiResponse;
 import com.jimmy.debug.DebugManager;
-
-import org.json.JSONObject;
 
 
 public class HomeActivity extends CoreActivity<HomeActivityBinding> implements View.OnClickListener {
