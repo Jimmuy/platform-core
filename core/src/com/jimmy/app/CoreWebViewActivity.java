@@ -1,5 +1,6 @@
 package com.jimmy.app;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -15,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.jimmy.core.R;
+
+import org.jetbrains.annotations.NotNull;
 
 
 public class CoreWebViewActivity extends CoreActivity {
@@ -34,7 +37,7 @@ public class CoreWebViewActivity extends CoreActivity {
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.webview_layout;
     }
 
@@ -58,42 +61,7 @@ public class CoreWebViewActivity extends CoreActivity {
     protected void setupView() {
         webView = (WebView) findViewById(R.id.webview);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
-//        if (getTitleBar().getTitleStyle() == TitleBar.CUSTOM_TITLE) {
-//            getTitleBar().setLeftView(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//                    goBack();
-//                }
-//            });
-//            getTitleBar().addRightViewItem("close", getString(R.string.close), new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (webView.canGoBack()) {
-//                        if (!TextUtils.isEmpty(alertMessage)) {
-//                        } else {
-//                            new AlertDialog.Builder(CoreWebViewActivity.this)
-//                                    .setTitle(getString(R.string.whether_close_alert))
-//                                    .setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialogInterface, int i) {
-//                                            hideKeyboard(webView);
-//                                            finish();
-//                                        }
-//                                    }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialogInterface, int i) {
-//                                    dialogInterface.dismiss();
-//                                }
-//                            }).show();
-//                        }
-//                    } else {
-//                        hideKeyboard(webView);
-//                        finish();
-//                    }
-//                }
-//            });
-//        }
+
     }
 
     protected void setupWebView() {
@@ -137,6 +105,12 @@ public class CoreWebViewActivity extends CoreActivity {
 
     protected WebChromeClient createChromeWebViewClient() {
         return new QCWebChromeClient();
+    }
+
+    @NotNull
+    @Override
+    public ILoadingDialog getProgressDialog() {
+        return new CoreLoadingDialog(this);
     }
 
     public class QCWebViewClient extends WebViewClient {

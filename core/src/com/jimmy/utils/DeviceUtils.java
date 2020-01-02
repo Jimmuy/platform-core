@@ -11,9 +11,6 @@ import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by lorin on 16/3/7.
- */
 public class DeviceUtils {
 
     public static String getPhoneModel() {
@@ -95,14 +92,21 @@ public class DeviceUtils {
     public static int getProcessMemorySize(Context context, int pid) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         int[] pids = new int[]{pid};
-        Debug.MemoryInfo[] memoryInfo = am.getProcessMemoryInfo(pids);
-        memoryInfo[0].getTotalSharedDirty();
-        int memSize = memoryInfo[0].getTotalPss();
+        Debug.MemoryInfo[] memoryInfo;
+        int memSize = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ECLAIR) {
+            memoryInfo = am.getProcessMemoryInfo(pids);
+            memoryInfo[0].getTotalSharedDirty();
+            memSize = memoryInfo[0].getTotalPss();
+        }
         return memSize;
     }
 
-    public static String getUUID(Context context){
-        return DeviceUuidFactory.getUUID(context);
+    public static String getUUID(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+            return DeviceUuidFactory.getUUID(context);
+        }
+        return "";
     }
 
     public static String getMD5(String content) {

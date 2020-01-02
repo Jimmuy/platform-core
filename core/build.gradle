@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion Integer.parseInt(ANDROID_BUILD_SDK_VERSION)
@@ -30,26 +33,31 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
     dataBinding {
+        //noinspection DataBindingWithoutKapt
         enabled = true
     }
-}
-
-
-configurations.all {
-
-    resolutionStrategy {
-
-        cacheChangingModulesFor 0, 'seconds'
-
+    androidExtensions {
+        experimental = true
     }
-
-
 }
 
 dependencies {
-    api 'androidx.appcompat:appcompat:1.0.2'
-    api 'org.cryptonode.jncryptor:jncryptor:1.2.0'
-    api 'com.google.code.gson:gson:2.8.5'
-    api 'com.squareup.okhttp3:okhttp:3.11.0'
+
+    implementation project(':net')
+    implementation deps.multidex
+    implementation deps.kotlin_jdk
+    implementation deps.appcompat
+    implementation deps.core_ktx
+    implementation deps.material
+    implementation deps.lifecycle_extensions
+    //zxing
+    implementation deps.zxing
+    //gson
+    implementation deps.gson
+    //recycleview
+    implementation deps.recycle_view
+    // 状态栏 基础依赖包，必须要依赖
+    implementation deps.immersionbar.immersionbar
+    implementation deps.immersionbar.components
 }
 

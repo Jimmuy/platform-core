@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data class="TitleBinding" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/titlebar_height"
         android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize">
+        android:gravity="center_vertical">
         <!--自定义toolbar的title 和subtitle -->
         <TextView
             android:id="@+id/tv_right_text"
@@ -18,7 +19,7 @@
             android:layout_gravity="right"
             android:paddingRight="15dp"
             android:singleLine="true"
-            android:textColor="@color/white" />
+            android:textColor="@color/color_333333" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -29,7 +30,7 @@
             android:ellipsize="end"
             android:lines="1"
             android:scrollHorizontally="true"
-            android:textColor="@color/white" />
+            android:textColor="@color/color_333333" />
 
     </androidx.appcompat.widget.Toolbar>
 

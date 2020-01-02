@@ -3,7 +3,7 @@ package com.jimmy.log.analysis;
 import android.text.format.DateFormat;
 
 import com.jimmy.app.CoreApplication;
-import com.jimmy.datamodel.GsonConverter;
+import com.jimmy.utils.GsonConverter;
 import com.jimmy.log.CoreLog;
 import com.jimmy.log.ConsoleLog;
 import com.jimmy.log.LogDBHelper;
@@ -28,7 +28,7 @@ public class AnalysisService {
     private static int limitCount = 20;
     public static boolean isDebug = false;
 
-    private static String uuid = DeviceUtils.getUUID(CoreApplication.getInstance());
+    private static String uuid = DeviceUtils.getUUID(CoreApplication.get());
 
     /**
      * 传入URL，初始化AnalysisService

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.jimmy.app.CoreApplication;
 
+
 /**
  * Created by lorin on 16/2/3.
  * 崩溃日志DBHelper
@@ -26,7 +27,7 @@ public class LogDBHelper extends SQLiteOpenHelper {
         if (null == dbHelper) {
             synchronized (LogDBHelper.class) {
                 if (dbHelper == null) {
-                    dbHelper = new LogDBHelper(CoreApplication.getInstance());
+                    dbHelper = new LogDBHelper(CoreApplication.get());
                 }
             }
         }

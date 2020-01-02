@@ -3,8 +3,12 @@ package com.jimmy.debug.activity;
 import android.os.Bundle;
 
 import com.jimmy.app.CoreActivity;
+import com.jimmy.app.CoreLoadingDialog;
+import com.jimmy.app.ILoadingDialog;
 import com.jimmy.core.R;
 import com.jimmy.core.databinding.CrashDetailBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 崩溃日志详情界面
@@ -22,9 +26,14 @@ public class DebugCrashDetailActivity extends CoreActivity<CrashDetailBinding> {
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.crash_info_detail_activity;
     }
 
 
+    @NotNull
+    @Override
+    public ILoadingDialog getProgressDialog() {
+        return new CoreLoadingDialog(this);
+    }
 }

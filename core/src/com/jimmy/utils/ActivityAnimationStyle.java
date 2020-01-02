@@ -1,8 +1,6 @@
 package com.jimmy.utils;
 
-/**
- * Created by Yang on 15/1/6.
- */
+
 public interface ActivityAnimationStyle {
     int STYLE_SLIDE_IN = 0;
     int STYLE_MODAL_IN = 1;

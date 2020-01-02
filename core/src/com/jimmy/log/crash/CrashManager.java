@@ -88,7 +88,7 @@ public class CrashManager {
         sb.append(stringWriter.toString());
 
         CrashInfoModel info = new CrashInfoModel();
-        Application application = CoreApplication.getInstance();
+        Application application = CoreApplication.get();
         info.setHasSent(0);
         info.setUuid(DeviceUtils.getUUID(application));
         info.setDate(DateFormat.format("yyyy-MM-dd kk:mm:ss", crashTime).toString());
@@ -112,7 +112,7 @@ public class CrashManager {
      * 处理应用崩溃
      */
     private static void processCrash(Thread thread, Throwable ex) {
-        Context context = CoreApplication.getInstance();
+        Context context = CoreApplication.get();
         if (SystemUtils.isDebuggable(context)) {
             defaultExceptionHandler.uncaughtException(thread, ex);
             return;
@@ -171,7 +171,7 @@ public class CrashManager {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(CoreApplication.getInstance(), message, Toast.LENGTH_LONG).show();
+                Toast.makeText(CoreApplication.get(), message, Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
         }).start();

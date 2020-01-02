@@ -36,7 +36,7 @@ public class DebugManager {
         if (instance == null) {
             synchronized (DebugManager.class) {
                 if(instance == null) {
-                    instance = new DebugManager(CoreApplication.getInstance());
+                    instance = new DebugManager(CoreApplication.get());
                 }
             }
         }
