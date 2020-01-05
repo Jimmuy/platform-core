@@ -43,21 +43,21 @@ android {
 
 dependencies {
 
-    implementation project(':net')
-    implementation deps.multidex
-    implementation deps.kotlin_jdk
-    implementation deps.appcompat
-    implementation deps.core_ktx
-    implementation deps.material
-    implementation deps.lifecycle_extensions
+    api project(':net')
+    api deps.multidex
+    api deps.kotlin_jdk
+    api deps.appcompat
+    api deps.core_ktx
+    api deps.material
+    api deps.lifecycle_extensions
     //zxing
-    implementation deps.zxing
+    api deps.zxing
     //gson
-    implementation deps.gson
+    api deps.gson
     //recycleview
-    implementation deps.recycle_view
+    api deps.recycle_view
     // 状态栏 基础依赖包，必须要依赖
-    implementation deps.immersionbar.immersionbar
-    implementation deps.immersionbar.components
+    api deps.immersionbar.immersionbar
+    api deps.immersionbar.components
 }
 

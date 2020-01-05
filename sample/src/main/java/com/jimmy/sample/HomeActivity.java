@@ -11,8 +11,12 @@ import android.widget.Toast;
 import com.jimmy.app.CoreActivity;
 import com.jimmy.app.CoreLoadingDialog;
 import com.jimmy.app.ILoadingDialog;
+import com.jimmy.iot.net.callback.SimpleCallBack;
+import com.jimmy.iot.net.exception.ApiException;
 import com.jimmy.sample.databinding.HomeActivityBinding;
 import com.jimmy.debug.DebugManager;
+import com.jimmy.sample.net.DemoApiResult;
+import com.jimmy.sample.net.HttpManager;
 
 
 public class HomeActivity extends CoreActivity<HomeActivityBinding> implements View.OnClickListener {
@@ -31,8 +35,13 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
     }
 
     private void initTitle() {
+        //提供通用的标题和返回样式，可以自定义左边返回样式和右边操作按钮样式，如果需要自定义titlebar 可以禁用本身自带的再去自定义
+
+        //设置title
         setTitle("Home");
+        //设置右边副标题
         setRightText("right");
+        //设置右边副标题的点击事件
         getRightView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,29 +81,18 @@ public class HomeActivity extends CoreActivity<HomeActivityBinding> implements V
     }
 
     private void sendRequest() {
-//        BasicApiRequest request = new BasicApiRequest(" https://www.easy-mock.com/mock/5c515611b1c1b9153666e243/example/test/get", "GET");
-//        getApiService().exec(request, new RequestHandler<ApiRequest, ApiResponse>() {
-//            @Override
-//            public void onRequestStart(ApiRequest req) {
-//
-//            }
-//
-//            @Override
-//            public void onRequestProgress(ApiRequest req, int count, int total) {
-//
-//            }
-//
-//            @Override
-//            public void onRequestFinish(ApiRequest req, ApiResponse resp) {
-//                binding.tvContent.setText(resp.getJsonResult().toString());
-//                Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onRequestFailed(ApiRequest req, ApiResponse resp) {
-//                Toast.makeText(HomeActivity.this, "fail", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        HttpManager.get("https://www.easy-mock.com/mock/5c515611b1c1b9153666e243/example/test/get/standard").execute(new SimpleCallBack<Object>() {
+            @Override
+            public void onError(ApiException e) {
+                Toast.makeText(HomeActivity.this, "fail", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(Object o) {
+                Toast.makeText(HomeActivity.this, "success", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
