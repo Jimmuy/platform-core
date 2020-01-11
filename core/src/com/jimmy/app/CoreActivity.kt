@@ -22,11 +22,15 @@ import com.jimmy.dataSource.Resource
 import com.jimmy.dataSource.Status
 import com.jimmy.utils.dpToPixel
 
+
 /**
  * Base Activity extends fragment activity.
  * Contains basic service and widget.
  * T is Data Binding class name
  */
+//默认的title bar高度
+const val DEFAULT_TITLE_BAR_HEIGHT = 44f
+
 abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     protected lateinit var binding: T
@@ -84,9 +88,14 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
         initView()
     }
 
+    /**
+     *重写该方法来修改顶部状态栏的颜色和状态，具体使用方法参考 https://github.com/gyf-dev/ImmersionBar
+     */
     protected open fun initStatusBar() {
-        ImmersionBar.with(this).fitsSystemWindows(true).statusBarDarkFont(true, 0.2f)
-            .statusBarColor(R.color.white).init()
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)  //使用该属性,必须指定状态栏颜色
+                .statusBarColor(R.color.colorPrimary)
+                .init()
     }
 
     private fun initToolBar() {
@@ -94,13 +103,13 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
         if (isShowTitleBar()) {
             require(binding.root is ViewGroup) { "root view must be a view group" }
             titleBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(this),
-                R.layout.view_toolbar,
-                null,
-                false
+                    LayoutInflater.from(this),
+                    R.layout.view_toolbar,
+                    null,
+                    false
             )
             titleBinding?.root?.layoutParams =
-                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPixel(this, 44f))
+                    ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPixel(this, getTitleBarHeight()))
             (binding.root as ViewGroup).addView(titleBinding?.root, 0)
 
             if (titleBinding == null) return
@@ -119,13 +128,14 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     }
 
+
     /**
      * 子类可复写做一些初始化的工作
      */
     protected open fun initView() {
         progressDialog = getProgressDialog()
     }
-    
+
     abstract fun getProgressDialog(): ILoadingDialog
 
     override fun onResume() {
@@ -140,6 +150,10 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
+    /**
+     * 子类可复写来设置默认title bar 高度
+     */
+    protected open fun getTitleBarHeight() = DEFAULT_TITLE_BAR_HEIGHT
 
     override fun onPause() {
         super.onPause()
@@ -147,18 +161,6 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
         if (this == CoreApplication.get().currentActivity) {
             CoreApplication.get().currentActivity = null
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        CoreApplication.get().activityOnDestroy(this)
-        if (this == CoreApplication.get().currentActivity) {
-            CoreApplication.get().currentActivity = null
-        }
-        progressDialog?.dismissLoading()
-        binding.unbind()
-
-
     }
 
     fun setRightText(rightTitle: CharSequence) {
@@ -225,9 +227,9 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     /*统一设置数据请求界面loading展示.上层也可重写此方法进行自定义loading加载*/
     protected fun <T> setStates(
-        it: Resource<T>,
-        listener: DataHandler<T>,
-        needLoading: Boolean = true
+            it: Resource<T>,
+            listener: DataHandler<T>,
+            needLoading: Boolean = true
     ) {
         when (it.status) {
             Status.LOADING -> {
@@ -253,10 +255,20 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
     }
 
     fun showLoadingDialog() {
-   
         if (!progressDialog.isShowing() && !isFinishing) {
             progressDialog.showLoading()
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        CoreApplication.get().activityOnDestroy(this)
+        if (this == CoreApplication.get().currentActivity) {
+            CoreApplication.get().currentActivity = null
+        }
+        progressDialog?.dismissLoading()
+        binding.unbind()
+    }
+
 
 }

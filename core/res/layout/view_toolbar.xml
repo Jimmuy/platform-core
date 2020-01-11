@@ -19,7 +19,7 @@
             android:layout_gravity="right"
             android:paddingRight="15dp"
             android:singleLine="true"
-            android:textColor="@color/color_333333" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -30,7 +30,7 @@
             android:ellipsize="end"
             android:lines="1"
             android:scrollHorizontally="true"
-            android:textColor="@color/color_333333" />
+            android:textColor="@color/white" />
 
     </androidx.appcompat.widget.Toolbar>
 
