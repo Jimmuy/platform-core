@@ -107,11 +107,7 @@ public class CoreWebViewActivity extends CoreActivity {
         return new QCWebChromeClient();
     }
 
-    @NotNull
-    @Override
-    public ILoadingDialog getProgressDialog() {
-        return new CoreLoadingDialog(this);
-    }
+
 
     public class QCWebViewClient extends WebViewClient {
 

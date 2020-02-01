@@ -109,7 +109,4 @@ class HomeActivity : CoreActivity<HomeActivityBinding>(), View.OnClickListener {
         DebugManager.getInstance().setDebugMode(false)
     }
 
-    override fun getProgressDialog(): ILoadingDialog {
-        return CoreLoadingDialog(this)
-    }
 }

@@ -31,9 +31,5 @@ public class DebugCrashDetailActivity extends CoreActivity<CrashDetailBinding> {
     }
 
 
-    @NotNull
-    @Override
-    public ILoadingDialog getProgressDialog() {
-        return new CoreLoadingDialog(this);
-    }
+
 }

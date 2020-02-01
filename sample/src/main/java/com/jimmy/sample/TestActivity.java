@@ -42,8 +42,4 @@ public class TestActivity extends CoreActivity<HomeActivityBinding> implements V
     }
 
 
-    @Override
-    public ILoadingDialog getProgressDialog() {
-        return new CoreLoadingDialog(this);
-    }
 }
