@@ -1,7 +1,6 @@
 package com.jimmy.app
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -85,8 +84,10 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
         CoreApplication.get().activityOnCreate(this)
         initStatusBar()
         initToolBar()
+        initLoading()
         initView()
     }
+
 
     /**
      *重写该方法来修改顶部状态栏的颜色和状态，具体使用方法参考 https://github.com/gyf-dev/ImmersionBar
@@ -133,12 +134,14 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
      * 子类可复写做一些初始化的工作
      */
     protected open fun initView() {
-        getProgressDialog()
     }
 
-    fun getProgressDialog(): ILoadingDialog {
+    private fun initLoading() {
+        this.progressDialog = setupProgressDialog()
+    }
+
+    fun setupProgressDialog(): ILoadingDialog {
         val defaultLoadingDialog = CoreLoadingDialog(this)
-        this.progressDialog = defaultLoadingDialog
         return defaultLoadingDialog
     }
 

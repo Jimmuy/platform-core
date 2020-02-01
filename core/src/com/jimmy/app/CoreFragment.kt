@@ -40,7 +40,7 @@ abstract class CoreFragment<T : ViewDataBinding> : SimpleImmersionFragment() {
     }
 
     protected open fun initView() {
-        progressDialog = (activity as CoreActivity<*>).getProgressDialog()
+        progressDialog = (activity as CoreActivity<*>).setupProgressDialog()
     }
 
 
