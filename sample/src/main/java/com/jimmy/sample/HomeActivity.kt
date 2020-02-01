@@ -17,6 +17,7 @@ import com.jimmy.sample.databinding.HomeActivityBinding
 import com.jimmy.debug.DebugManager
 import com.jimmy.sample.net.DemoApiResult
 import com.jimmy.sample.net.HttpManager
+import retrofit2.Retrofit
 
 
 class HomeActivity : CoreActivity<HomeActivityBinding>(), View.OnClickListener {

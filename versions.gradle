@@ -7,7 +7,7 @@ build_versions.version_name = "1.0.8"
 ext.build_versions = build_versions
 
 def versions = [:]
-versions.gradle_plugin = '3.5.2'
+versions.gradle_plugin = '3.5.3'
 versions.glide = "3.7.0"
 versions.gson = "2.8.5"
 versions.recycle_view = "1.0.1"

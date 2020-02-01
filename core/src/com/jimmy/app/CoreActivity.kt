@@ -133,10 +133,14 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
      * 子类可复写做一些初始化的工作
      */
     protected open fun initView() {
-        progressDialog = getProgressDialog()
+        getProgressDialog()
     }
 
-    abstract fun getProgressDialog(): ILoadingDialog
+    fun getProgressDialog(): ILoadingDialog {
+        val defaultLoadingDialog = CoreLoadingDialog(this)
+        this.progressDialog = defaultLoadingDialog
+        return defaultLoadingDialog
+    }
 
     override fun onResume() {
         super.onResume()
@@ -254,6 +258,7 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     }
 
+
     fun showLoadingDialog() {
         if (!progressDialog.isShowing() && !isFinishing) {
             progressDialog.showLoading()
@@ -266,9 +271,9 @@ abstract class CoreActivity<T : ViewDataBinding> : AppCompatActivity() {
         if (this == CoreApplication.get().currentActivity) {
             CoreApplication.get().currentActivity = null
         }
-        progressDialog?.dismissLoading()
         binding.unbind()
-    }
+        hideLoadingDialog()
 
+    }
 
 }
