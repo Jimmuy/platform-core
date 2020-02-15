@@ -21,12 +21,11 @@ import retrofit2.Retrofit
 
 
 class HomeActivity : CoreActivity<HomeActivityBinding>(), View.OnClickListener {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    override fun initView() {
+        //这里进行初始化
         binding.onClick = this
         initTitle()
-
-
     }
 
     public override fun getLayoutId(): Int {

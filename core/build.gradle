@@ -43,13 +43,14 @@ android {
 
 dependencies {
 
-    api project(':net')
     api deps.multidex
     api deps.kotlin_jdk
     api deps.appcompat
     api deps.core_ktx
     api deps.material
     api deps.lifecycle_extensions
+    //网络库
+    api deps.net
     //zxing
     api deps.zxing
     //gson

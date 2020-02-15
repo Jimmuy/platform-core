@@ -21,6 +21,7 @@ versions.material = "1.1.0-alpha05"
 versions.calendarview = "3.6.7"
 versions.lifecycle_extensions = "2.1.0"
 versions.zxing = "3.6.0"
+versions.net = "v1.0.0-net"
 
 def deps = [:]
 deps.gradle_plugin = "com.android.tools.build:gradle:$versions.gradle_plugin"
@@ -33,6 +34,7 @@ deps.core_ktx = "androidx.core:core-ktx:$versions.core_ktx"
 deps.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
 deps.material = "com.google.android.material:material:$versions.material"
 deps.lifecycle_extensions = 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+deps.net = "com.github.Jimmuy:platform-net:$versions.net"
 
 
 deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
