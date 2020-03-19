@@ -141,4 +141,4 @@ class HomeActivity : CoreActivity<HomeActivityBinding>(), View.OnClickListener {
 
 ```
 ### 基类CoreFragment的使用
-基本和CoreActivity相同
+基本和CoreActivity相同,可参考CoreActivity
